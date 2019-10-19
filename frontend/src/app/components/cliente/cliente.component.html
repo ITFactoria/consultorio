@@ -1,0 +1,179 @@
+<div class="container main-container">
+
+  <div class="card border-info mb-3">
+    <!-- <div class="card-header">Consulta de cliente</div> -->
+    <div class="card-body text-info">
+      <h5 class="card-title" *ngIf="flagAccionCliente === 1">Adicionar Cliente</h5>
+
+      <h5 class="card-title" *ngIf="flagAccionCliente === 2">Consultar Cliente</h5>
+
+      <br>
+
+      <form [formGroup]='formulario' (ngSubmit)='submitForm()'>
+
+        <div class="form-row">
+
+          <div class="form-group col-md-2">
+            <label for="idCliente">C&eacute;dula</label>
+            <input type="text" class="form-control" placeholder="Cedula" formControlName="idCliente">
+            <div class="alert-danger"
+              *ngIf="formulario.get('idCliente').invalid && (formulario.get('idCliente').dirty || formulario.get('idCliente').touched)">
+              <div *ngIf="formulario.get('idCliente').errors.required">
+                Campo requerido
+              </div>
+              <div *ngIf="formulario.get('idCliente').errors.minlength">
+                Minimo 3 caracteres
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group col-md-5">
+            <label for="nombres">Nombres</label>
+            <input type="text" class="form-control" placeholder="Nombres" formControlName="nombres">
+            <div class="alert-danger"
+              *ngIf="formulario.get('nombres').invalid && (formulario.get('nombres').dirty || formulario.get('nombres').touched)">
+              <div *ngIf="formulario.get('nombres').errors.required">
+                Campo requerido
+              </div>
+              <div *ngIf="formulario.get('nombres').errors.minlength">
+                Minimo 3 caracteres
+              </div>
+            </div>
+
+          </div>
+
+          <div class="form-group col-md-5">
+            <label for="apellidos">Apellidos</label>
+            <input type="text" class="form-control" placeholder="Apellidos" formControlName="apellidos">
+            <div class="alert-danger"
+              *ngIf="formulario.get('apellidos').invalid && (formulario.get('apellidos').dirty || formulario.get('apellidos').touched)">
+              <div *ngIf="formulario.get('apellidos').errors.required">
+                Campo requerido
+              </div>
+              <div *ngIf="formulario.get('apellidos').errors.minlength">
+                Minimo 3 caracteres
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Segunda Linea -->
+        <div class="form-row">
+          <div class="form-group col-md-8">
+            <div class="form-group">
+              <label for="direccion">Direcci&oacute;n</label>
+              <input type="text" class="form-control" placeholder="Direccion" formControlName="direccion">
+              <div class="alert-danger"
+                *ngIf="formulario.get('direccion').invalid && (formulario.get('direccion').dirty || formulario.get('direccion').touched)">
+                <div *ngIf="formulario.get('direccion').errors.required">
+                  Campo requerido
+                </div>
+                <div *ngIf="formulario.get('direccion').errors.minlength">
+                  Minimo 10 caracteres
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group col-md-2">
+            <label for="municipio">Municipio</label>
+            <input type="text" class="form-control" placeholder="Municipio" formControlName="municipio">
+            <div class="alert-danger"
+              *ngIf="formulario.get('municipio').invalid && (formulario.get('municipio').dirty || formulario.get('municipio').touched)">
+              <div *ngIf="formulario.get('municipio').errors.required">
+                Campo requerido
+              </div>
+              <div *ngIf="formulario.get('municipio').errors.minlength">
+                Minimo 4 caracteres
+              </div>
+            </div>
+
+          </div>
+
+          <div class="form-group col-md-2">
+            <label for="departamento">Departamento</label>
+            <select id="inputState" class="form-control" placeholder="Departamento" formControlName="departamento">
+              <option selected>Choose...</option>
+              <option>...</option>
+            </select>
+          </div>
+
+        </div>
+
+        <!-- Tercera linea -->
+        <div class="form-row">
+          <div class="form-group col-md-3">
+            <label for="telefono">Tel&eacute;fono</label>
+            <input type="text" class="form-control" placeholder="Telefono" formControlName="telefono">
+            <div class="alert-danger"
+              *ngIf="formulario.get('telefono').invalid && (formulario.get('telefono').dirty || formulario.get('telefono').touched)">
+              <div *ngIf="formulario.get('telefono').errors.required">
+                Campo requerido
+              </div>
+              <div *ngIf="formulario.get('telefono').errors.minlength">
+                Minimo 6 caracteres
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group col-md-6">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" placeholder="Email" formControlName="email">
+          </div>
+
+          <div class="form-group col-md-2">
+            <label for="sexo">Sexo</label>
+            <input type="text" class="form-control" placeholder="Sexo" formControlName="sexo">
+            <div class="alert-danger"
+              *ngIf="formulario.get('sexo').invalid && (formulario.get('sexo').dirty || formulario.get('sexo').touched)">
+              <div *ngIf="formulario.get('sexo').errors.required">
+                Campo requerido
+              </div>
+              <div *ngIf="formulario.get('sexo').errors.minlength">
+                Minimo 6 caracteres
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group col-md-1">
+            <label for="edad">Edad</label>
+            <input type="text" class="form-control" placeholder="Edad" formControlName="edad">
+            <div class="alert-danger"
+              *ngIf="formulario.get('edad').invalid && (formulario.get('edad').dirty || formulario.get('edad').touched)">
+              <div *ngIf="formulario.get('edad').errors.required">
+                Campo requerido
+              </div>
+              <div *ngIf="formulario.get('edad').errors.minlength">
+                Minimo 1 caracter
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+
+
+
+        <div class="form-row">
+          <div class="form-group col-md-12">
+            <label for="caracteristicas">Caracterizacion paciente</label>
+            <textarea class="form-control" rows="3" formControlName="caracteristicas"></textarea>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <button type="submit" class="btn btn-info">Guardar</button>
+
+          </div>
+          <div class="form-group col-md-6">
+            <button type="submit" class="btn btn-secondary" [routerLink]="['/clientes']" routerLinkActive="router-link-active" >Regresar</button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+  {{formulario.valid}}
+
+</div>

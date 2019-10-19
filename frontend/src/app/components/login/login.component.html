@@ -1,0 +1,13 @@
+<div *ngIf="!validacionCorrecta">{{mensajeValidacion}}</div>
+  
+
+
+<div>
+  usuario:  <input type = "text" name= "username" [(ngModel)]="username">
+  password: <input type = "password" name = "password" [(ngModel)]="password">
+  {{username}}
+
+  <button (click)="procesarData()">Enviar</button>
+  
+
+</div>
