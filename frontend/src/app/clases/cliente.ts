@@ -2,12 +2,18 @@ import { Icliente } from "../interfaces/icliente";
 
 
 export class Cliente implements Icliente {
-    id : string;
+    idCliente : string;
     nombres: string;
     apellidos : string;
     direccion : string;
-    telefono: string;
     municipio : string;
-    fechaCreacion : string
+    departamento: string;
+    telefono: string;
+    email: string;
+    sexo: string;
+    edad: number;
+    caracteristicas: string;
+    fechaCreacion: string;
+
 
 }

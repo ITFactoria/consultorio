@@ -7,8 +7,11 @@ package com.itfactoria.rest.webservices.restfulwebservices.cliente;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -28,6 +31,27 @@ public class ClienteResource {
         return clientes.getClientes();
     
     }
+    
+    //GET /clientes/{id}
+    @GetMapping("/clientes/{idCliente}")
+    public Cliente getCliente(@PathVariable String idCliente){
+        return clientes.getClienteById(idCliente);
+    
+    }
+    
+    //DELETE /clientes/{idCliente}
+    @DeleteMapping("/clientes/{idCliente}")
+    public ResponseEntity<Void> deleteCliente(@PathVariable String idCliente){
+        Cliente cliente = clientes.deleteCliente(idCliente);
+        if(cliente != null){
+            return ResponseEntity.noContent().build();
+        }
+        else {
+            return ResponseEntity.notFound().build();}
+        
+        
+    }
+    
     
     
 }

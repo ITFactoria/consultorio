@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { ClienteService } from "../../services/cliente.service";
+import { Icliente } from 'src/app/interfaces/icliente';
 
 @Component({
   selector: 'app-cliente',
@@ -11,6 +13,8 @@ export class ClienteComponent implements OnInit {
 
   idCliente : string;
   formulario : FormGroup;
+  cliente: Icliente;
+
   /*Accion deseada
   1 = adicionar cliente
   2 = actualizar cliente
@@ -19,7 +23,7 @@ export class ClienteComponent implements OnInit {
   flagAccionCliente : number;
 
 
-  constructor( private _activatedRoute: ActivatedRoute) { }
+  constructor( private _activatedRoute: ActivatedRoute, private _clienteService: ClienteService) { }
 
   ngOnInit() {
     this.idCliente = this._activatedRoute.snapshot.params['idCliente'];
@@ -35,6 +39,7 @@ export class ClienteComponent implements OnInit {
       'sexo' : new FormControl('',[Validators.required, Validators.minLength(1)]),
       'edad' : new FormControl('',[Validators.required, Validators.minLength(1)]),
       'caracteristicas' : new FormControl(),
+      'fechaCreacion' : new FormControl(),
      
     })
 
@@ -51,6 +56,9 @@ export class ClienteComponent implements OnInit {
       //Actualizar Cliente
       console.log('Actualizar Cliente');
       this.flagAccionCliente = 2;
+      this.getCliente(this.idCliente);
+
+      
 
       
 
@@ -58,6 +66,19 @@ export class ClienteComponent implements OnInit {
     }
 
     
+  }
+
+  getCliente(idCliente: string){
+    this._clienteService.getCliente(idCliente).subscribe(
+      response =>{console.log(response);
+        this.cliente = response;
+        this.formulario.setValue(this.cliente);
+      
+      },
+      error=>{}
+      
+    )
+
   }
 
   submitForm(){

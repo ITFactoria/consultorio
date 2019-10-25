@@ -15,10 +15,7 @@ export class ClientesService {
     this.clientes = CLIENTES;
   }
   
-  getClientesA(): Icliente[]{
-    return CLIENTES;
-  }
-
+  
   getClientes() {
     return this._httpClient.get<Icliente[]>('http://localhost:8080/clientes');
     
@@ -28,5 +25,10 @@ export class ClientesService {
   getClientesPathVariable(name){
     return this._httpClient.get(`http://localhost:8080/consultorio-bean/path-variable/${name}`);
     
+  }
+
+  deleteCliente(idCliente: string){
+    return this._httpClient.delete(`http://localhost:8080/clientes/${idCliente}`);
+
   }
 }
