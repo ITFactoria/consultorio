@@ -15,6 +15,7 @@ export class ClientesComponent implements OnInit {
   flagClienteNuevo : boolean = false;
   message: string;
   flagClienteEliminado = false;
+  flagProblemasTecnicos = false;
 
   constructor( private _clientesService: ClientesService, private _router: Router) { }
 
@@ -45,7 +46,13 @@ export class ClientesComponent implements OnInit {
       response =>{
         (console.log(response));
         this.clientes = response;
-      }
+      },
+      error=>{
+        console.log('Error al consultar clientes');
+        this.flagProblemasTecnicos = true;
+        this.message = 'Problemas tecnicos presentados. Por favor contacte a soporte tecnico.';
+
+    }
     );
 
 
@@ -58,7 +65,7 @@ export class ClientesComponent implements OnInit {
 
   }
 
-  adicionarCliente(){
+  addCliente(){
     console.log('adicionar cliente');
     this.flagClienteNuevo = true;
 

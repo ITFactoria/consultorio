@@ -11,8 +11,6 @@ package com.itfactoria.rest.webservices.restfulwebservices.cliente;
  */
 public class Cliente {
 
-    
-    
     public String idCliente;
     public String nombres;
     public String apellidos;
@@ -25,6 +23,11 @@ public class Cliente {
     public int edad;
     public String caracteristicas;
     public String fechaCreacion;
+
+    public Cliente() {
+    }
+    
+    
 
     public Cliente(String idCliente, String nombres, String apellidos, String direccion, String municipio, String departamento, String telefono, String email, String sexo, int edad, String caracteristicas, String fechaCreacion) {
         this.idCliente = idCliente;
@@ -40,8 +43,6 @@ public class Cliente {
         this.caracteristicas = caracteristicas;
         this.fechaCreacion = fechaCreacion;
     }
-    
-    
 
     public void setIdCliente(String idCliente) {
         this.idCliente = idCliente;
@@ -90,9 +91,6 @@ public class Cliente {
     public void setCaracteristicas(String caracteristicas) {
         this.caracteristicas = caracteristicas;
     }
-    
-    
-    
 
     public String getIdCliente() {
         return idCliente;
@@ -117,7 +115,7 @@ public class Cliente {
     public String getMunicipio() {
         return municipio;
     }
-    
+
     public String getDepartamento() {
         return departamento;
     }
@@ -137,12 +135,9 @@ public class Cliente {
     public String getCaracteristicas() {
         return caracteristicas;
     }
-    
-    
-
 
     public String getFechaCreacion() {
         return fechaCreacion;
     }
-    
+
 }

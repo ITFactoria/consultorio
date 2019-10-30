@@ -4,12 +4,27 @@
     <!-- <div class="card-header">Consulta de cliente</div> -->
     <div class="card-body text-info">
       <h5 class="card-title" *ngIf="flagAccionCliente === 1">Adicionar Cliente</h5>
-
       <h5 class="card-title" *ngIf="flagAccionCliente === 2">Consultar Cliente</h5>
+      <h5 class="card-title" *ngIf="flagAccionCliente === 3">Actualizar Cliente</h5>
+
+      <div class="alert alert-success" role="alert" *ngIf="flagAccionCliente==1 && flagOperacionExitosa==true">
+        {{userMessage}}
+      </div>
+      <div class="alert alert-danger" role="alert" *ngIf="flagAccionCliente==1 && flagOperacionExitosa==false">
+        {{userMessage}}
+      </div>
+      <div class="alert alert-success" role="alert" *ngIf="flagAccionCliente==3 && flagOperacionExitosa==true">
+          {{userMessage}}
+        </div>
+        <div class="alert alert-danger" role="alert" *ngIf="flagAccionCliente==3 && flagOperacionExitosa==false">
+          {{userMessage}}
+        </div>
+  
+
 
       <br>
 
-      <form [formGroup]='formulario' (ngSubmit)='submitForm()'>
+      <form [formGroup]='formulario' (ngSubmit)='submitForm(formulario)'>
 
         <div class="form-row">
 
@@ -162,12 +177,18 @@
         </div>
 
         <div class="form-row">
-          <div class="form-group col-md-6">
-            <button type="submit" class="btn btn-info">Guardar</button>
-
+          <div class="form-group col-md-4">
+            <button type="submit" class="btn btn-info"
+              [disabled]="!formulario.valid || flagAccionCliente == 2">Guardar</button>
           </div>
-          <div class="form-group col-md-6">
-            <button type="submit" class="btn btn-secondary" [routerLink]="['/clientes']" routerLinkActive="router-link-active" >Regresar</button>
+          <div class="form-group col-md-4">
+            <button type="button" class="btn btn-danger" [disabled]="!formulario.valid || flagAccionCliente == 1"
+              (click)='updateCliente()'>Editar</button>
+          </div>
+
+          <div class="form-group col-md-4">
+            <button type="submit" class="btn btn-secondary" [routerLink]="['/clientes']"
+              routerLinkActive="router-link-active">Regresar</button>
           </div>
         </div>
 

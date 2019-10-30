@@ -64,10 +64,23 @@ public class Clientes {
                 return null;
             }
         }
-            
-        
-    
     }
     
+    public Cliente updateCliente(Cliente cliente){
+        if(cliente.getIdCliente()!=null){
+            deleteCliente(cliente.getIdCliente());
+            clientes.add(cliente);
+            return cliente;
+        }
+        else{return null;}
+    }
+    
+    public Cliente addCliente(Cliente cliente){
+        clientes.add(cliente);
+        return cliente;
+        
+        
+    }
+
     
 }

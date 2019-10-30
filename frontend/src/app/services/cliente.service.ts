@@ -11,7 +11,14 @@ export class ClienteService {
 
   getCliente(idCliente: string){
     return this._httpClient.get<Icliente>(`http://localhost:8080/clientes/${idCliente}`);
+  }
 
+  updateCliente(idCliente : string, cliente: Icliente){
+    return this._httpClient.put<Icliente>(`http://localhost:8080/clientes/${idCliente}`, cliente);
+  }
+
+  addCliente(cliente: Icliente){
+    return this._httpClient.post<Icliente>(`http://localhost:8080/clientes/`,cliente);
   }
 }
 
