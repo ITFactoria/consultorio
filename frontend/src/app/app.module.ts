@@ -16,6 +16,7 @@ import { ConsultasComponent } from './components/consultas/consultas.component';
 import { ClientesService } from "../app/services/clientes.service";
 import { ClienteComponent } from './components/cliente/cliente.component';
 import { ErrorComponent } from './components/error/error.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { ErrorComponent } from './components/error/error.component';
     NavbarComponent,
     ConsultasComponent,
     ClienteComponent,
-    ErrorComponent
+    ErrorComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

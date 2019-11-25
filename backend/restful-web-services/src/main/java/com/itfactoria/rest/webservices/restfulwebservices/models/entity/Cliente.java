@@ -3,26 +3,38 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.itfactoria.rest.webservices.restfulwebservices.cliente;
+package com.itfactoria.rest.webservices.restfulwebservices.models.entity;
+
+import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  *
  * @author jaironino
  */
-public class Cliente {
+@Entity
+@Table(name="clientes")
+public class Cliente implements Serializable{
 
-    public String idCliente;
-    public String nombres;
-    public String apellidos;
-    public String direccion;
-    public String municipio;
-    public String departamento;
-    public String telefono;
-    public String email;
-    public String sexo;
-    public int edad;
-    public String caracteristicas;
-    public String fechaCreacion;
+    @Id
+    //@Column(nullable = false, unique = true)       
+    String idCliente;
+    //@Column(nullable = false)
+    private String nombres;
+    private String apellidos;
+    private String direccion;
+    private String municipio;
+    private String departamento;
+    private String telefono;
+    //@Column(nullable = false, unique = true)       
+    private String email;
+    private String sexo;
+    private int edad;
+    private String caracteristicas;
+    private String fechaCreacion;
 
     public Cliente() {
     }

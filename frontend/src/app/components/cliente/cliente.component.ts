@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { ClienteService } from "../../services/cliente.service";
 import { Icliente } from 'src/app/interfaces/icliente';
-import { DISABLED } from '@angular/forms/src/model';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-cliente',
@@ -27,7 +27,7 @@ export class ClienteComponent implements OnInit {
   flagAccionCliente: number;
 
 
-  constructor(private _activatedRoute: ActivatedRoute, private _clienteService: ClienteService) { }
+  constructor(private _activatedRoute: ActivatedRoute, private _clienteService: ClienteService, private _router: Router) { }
 
   ngOnInit() {
     this.idCliente = this._activatedRoute.snapshot.params['idCliente'];
@@ -108,55 +108,53 @@ export class ClienteComponent implements OnInit {
   }
 
   submitForm() {
-    console.log('submit');
-    console.log(this.formulario);
-    console.log(this.formulario.value);
-
+    
     switch (this.flagAccionCliente) {
       case 1: {
         //Add Cliente
-        console.log("AddCustomer");
         this.cliente = this.formulario.value;
-        console.log('call service');
         this._clienteService.addCliente(this.cliente).subscribe(
           response=>{
-            console.log('Cliente adicionado');
             this.flagOperacionExitosa==true;
-            this.userMessage = 'Cliente adicionado exitosamente';
+            //this.userMessage = 'Cliente adicionado exitosamente';
+            this._router.navigate(['/clientes']);
+            swal.fire('Crear cliente',`Cliente con CC ${this.cliente.idCliente} creado exitosamente`,'success');
+
+            
           },
           error=>{
             this.flagOperacionExitosa==false;
             this.userMessage = 'Error adicionando cliente. Intente de nuevo';
           }
-        )
+        );
+        break;
+
 
       }
       case 3: {
         //Update Cliente
-        console.log('updateeee cliente');
        
         this.cliente = this.formulario.value;
         this.cliente.idCliente = this.formulario.controls.idCliente.value;
        
         this._clienteService.updateCliente(this.idCliente, this.cliente).subscribe(
           response => { 
-            console.log(`responseee: ${response}`);
-            this.userMessage = 'Cliente actualizado exitosamente';
+            //this.userMessage = 'Cliente actualizado exitosamente';
             this.flagOperacionExitosa = true; 
+            this._router.navigate(['/clientes']);
+            swal.fire('Actualizar cliente', `Cliente con CC ${this.cliente.idCliente} actualizado exitosamente`);
             
          },
           error => {
             this.userMessage = 'Error actualizndo cliente. Intente de nuevo';
             this.flagOperacionExitosa = false; 
-             
-
           }
 
         )
-
-
-
       }
+      break;
+
+
     }
 
 

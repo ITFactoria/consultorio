@@ -17,8 +17,10 @@ const routes: Routes = [
   { path: 'clientes', component: ClientesComponent },
   { path: 'cliente/:idCliente', component: ClienteComponent },
   { path: 'cliente', component: ClienteComponent },
-  { path: '**', component: ErrorComponent },
-  { path: '', component: LoginComponent },
+  { path: '*', component: HomeComponent },
+  { path: '**', component: HomeComponent },
+  
+  { path: '', component: HomeComponent },
 
 ];
 

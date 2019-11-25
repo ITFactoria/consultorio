@@ -10,6 +10,8 @@ import { HttpClient } from "@angular/common/http";
 export class ClientesService {
 
   private clientes : Icliente[];
+  private urlBackend = 'http://localhost:8080/api/';
+  
 
   constructor(private _httpClient : HttpClient) { 
     this.clientes = CLIENTES;
@@ -17,18 +19,15 @@ export class ClientesService {
   
   
   getClientes() {
-    return this._httpClient.get<Icliente[]>('http://localhost:8080/clientes');
-    
+    return this._httpClient.get<Icliente[]>(`${this.urlBackend}clientes`);
     //return CLIENTES;
   }
 
-  getClientesPathVariable(name){
-    return this._httpClient.get(`http://localhost:8080/consultorio-bean/path-variable/${name}`);
-    
-  }
-
+  
   deleteCliente(idCliente: string){
-    return this._httpClient.delete(`http://localhost:8080/clientes/${idCliente}`);
+    console.log("delete cliente");
+    return this._httpClient.delete(`${this.urlBackend}clientes/${idCliente}`);
+    
 
   }
 }

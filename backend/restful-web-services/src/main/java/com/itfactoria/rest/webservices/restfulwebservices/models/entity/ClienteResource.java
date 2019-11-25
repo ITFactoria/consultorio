@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.itfactoria.rest.webservices.restfulwebservices.cliente;
+package com.itfactoria.rest.webservices.restfulwebservices.models.entity;
 
 import java.net.URI;
 import java.util.List;
@@ -60,6 +60,7 @@ public class ClienteResource {
     //UPDATE /clientes/{idCliente}
     @PutMapping("/clientes/{idCliente}")
     public ResponseEntity<Cliente> updateCliente(@PathVariable String idCliente, @RequestBody Cliente cliente){
+        
         clientes.updateCliente(cliente);
         return new ResponseEntity<Cliente>(cliente, HttpStatus.OK);
         
