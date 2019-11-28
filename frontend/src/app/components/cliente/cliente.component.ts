@@ -17,6 +17,7 @@ export class ClienteComponent implements OnInit {
   cliente: Icliente;
   userMessage : string;
   flagOperacionExitosa = false;
+  errores : string[];
 
   /*Accion deseada
   1 = adicionar cliente
@@ -125,6 +126,12 @@ export class ClienteComponent implements OnInit {
           error=>{
             this.flagOperacionExitosa==false;
             this.userMessage = 'Error adicionando cliente. Intente de nuevo';
+            this.errores = error.error.errors as string[];
+            console.error(`Codigo del error generado desde el backend: ${error.status}`);
+            console.error(error.error.errors);
+            swal.fire('Adicionar cliente', `Error en datos ${this.errores}`, 'error');
+            
+
           }
         );
         break;
@@ -147,7 +154,12 @@ export class ClienteComponent implements OnInit {
          },
           error => {
             this.userMessage = 'Error actualizndo cliente. Intente de nuevo';
-            this.flagOperacionExitosa = false; 
+            this.flagOperacionExitosa = false;
+            this.errores = error.error.errors as string[];
+            console.error(`Codigo de error generado desde el backend: ${error.status}`);
+            console.error(error.error.errors);
+            swal.fire('Actualizar cliente', `${this.errores}`,'error');
+            
           }
 
         )

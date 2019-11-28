@@ -10,6 +10,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -20,20 +24,53 @@ import javax.persistence.Table;
 public class Cliente implements Serializable{
 
     @Id
-    //@Column(nullable = false, unique = true)       
+    @Column(nullable = false, unique = true)       
     String idCliente;
-    //@Column(nullable = false)
+    @Column(nullable = false)
+    
+    @NotEmpty
+    @Size(min=4, max=100)
     private String nombres;
+    
+    @NotEmpty
+    @Size(min=4, max=100)
     private String apellidos;
+    
+    @NotEmpty
+    @Size(min=4, max=100)
     private String direccion;
+    
+    @NotEmpty
+    @Size(min=4, max=100)
+    @Column(nullable = false)       
     private String municipio;
+    
+    @NotEmpty
+    @Size(min=4, max=100)
     private String departamento;
+    
+    @NotEmpty
+    @Size(min=4, max=10)
     private String telefono;
-    //@Column(nullable = false, unique = true)       
+    
+    @Email
     private String email;
+    
+    @NotEmpty
+    @Size(min=1, max=1)
+    
     private String sexo;
+    
+    //@NotEmpty
+    //@Size(min=1, max=2)
+    @Digits(integer = 2, fraction = 0, message = "La edad debe estar entre 1 y 99 años")
     private int edad;
+    
+    @NotEmpty
+    @Size(min=4, max=200)
     private String caracteristicas;
+    
+    
     private String fechaCreacion;
 
     public Cliente() {

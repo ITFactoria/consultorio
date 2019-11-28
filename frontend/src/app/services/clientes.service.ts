@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { CLIENTES } from "../../app/components/clientes/clientes.json";
 import { Icliente } from "../interfaces/icliente";
 import { HttpClient } from "@angular/common/http";
+import { catchError } from 'rxjs/operators';
+import Swal from 'sweetalert2';
+import { throwError } from 'rxjs';
 
 
 @Injectable({
@@ -26,7 +29,13 @@ export class ClientesService {
   
   deleteCliente(idCliente: string){
     console.log("delete cliente");
-    return this._httpClient.delete(`${this.urlBackend}clientes/${idCliente}`);
+    return this._httpClient.delete(`${this.urlBackend}clientes/${idCliente}`).pipe(
+      catchError(e=>{
+        console.error(e.error.mensaje);
+        Swal.fire('Error al eliminar cliente', e.error.mensaje,'error');
+        return throwError(e);
+      })
+    );
     
 
   }
