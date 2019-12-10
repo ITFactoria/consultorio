@@ -2,6 +2,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from "@angular/common/http";
+import { DatePipe } from "@angular/common";
+
+//Material
+import { MaterialModule } from '../app/material/material.module';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,6 +24,7 @@ import { ClientesService } from "../app/services/clientes.service";
 import { ClienteComponent } from './components/cliente/cliente.component';
 import { ErrorComponent } from './components/error/error.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { ReadClienteComponent } from './components/read-cliente/read-cliente.component';
 
 
 @NgModule({
@@ -29,17 +37,21 @@ import { FooterComponent } from './components/footer/footer.component';
     ConsultasComponent,
     ClienteComponent,
     ErrorComponent,
-    FooterComponent
+    FooterComponent,
+    ReadClienteComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MaterialModule,
   ],
   providers: [
-    ClientesService
+    ClientesService,
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

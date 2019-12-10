@@ -5,6 +5,7 @@ import { HomeComponent } from "./components/home/home.component";
 import { ClientesComponent } from "./components/clientes/clientes.component"
 import { ConsultasComponent } from "./components/consultas/consultas.component";
 import { ClienteComponent } from "../app/components/cliente/cliente.component";
+import { ReadClienteComponent } from "../app/components/read-cliente/read-cliente.component";
 import { ErrorComponent } from "../app/components/error/error.component";
 
 
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'consultas', component: ConsultasComponent },
   { path: 'home/:username', component: HomeComponent },
   { path: 'clientes', component: ClientesComponent },
+  { path: 'read-cliente/:idCliente', component: ReadClienteComponent },
   { path: 'cliente/:idCliente', component: ClienteComponent },
   { path: 'cliente', component: ClienteComponent },
   { path: '*', component: HomeComponent },

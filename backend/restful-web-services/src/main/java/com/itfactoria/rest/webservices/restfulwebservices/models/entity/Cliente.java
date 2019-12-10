@@ -6,13 +6,18 @@
 package com.itfactoria.rest.webservices.restfulwebservices.models.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.Digits;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import static javax.persistence.TemporalType.DATE;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
@@ -58,27 +63,35 @@ public class Cliente implements Serializable{
     
     @NotEmpty
     @Size(min=1, max=1)
-    
     private String sexo;
     
-    //@NotEmpty
-    //@Size(min=1, max=2)
-    @Digits(integer = 2, fraction = 0, message = "La edad debe estar entre 1 y 99 años")
-    private int edad;
+    @NotNull
+    @Temporal(DATE)
+    private Date fechaNacimiento;
     
-    @NotEmpty
     @Size(min=4, max=200)
     private String caracteristicas;
     
+    @NotNull (message = "Fecha creacion no puede estar vacia")
+    @Temporal(DATE)
+    private Date fechaCreacion;
     
+    /*@NotEmpty
     private String fechaCreacion;
-
+    */
+    
+    /*@Prepersist
+    public void prePersist(){
+        fechaCreacion = new Date();
+    }*/
+    
+    
     public Cliente() {
     }
     
     
 
-    public Cliente(String idCliente, String nombres, String apellidos, String direccion, String municipio, String departamento, String telefono, String email, String sexo, int edad, String caracteristicas, String fechaCreacion) {
+    public Cliente(String idCliente, String nombres, String apellidos, String direccion, String municipio, String departamento, String telefono, String email, String sexo, Date fechaNacimiento, String caracteristicas, Date fechaCreacion) {
         this.idCliente = idCliente;
         this.nombres = nombres;
         this.apellidos = apellidos;
@@ -88,7 +101,7 @@ public class Cliente implements Serializable{
         this.telefono = telefono;
         this.email = email;
         this.sexo = sexo;
-        this.edad = edad;
+        this.fechaNacimiento = fechaNacimiento;
         this.caracteristicas = caracteristicas;
         this.fechaCreacion = fechaCreacion;
     }
@@ -121,7 +134,7 @@ public class Cliente implements Serializable{
         this.departamento = departamento;
     }
 
-    public void setFechaCreacion(String fechaCreacion) {
+    public void setFechaCreacion(Date fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
     }
 
@@ -133,8 +146,8 @@ public class Cliente implements Serializable{
         this.sexo = sexo;
     }
 
-    public void setEdad(int edad) {
-        this.edad = edad;
+    public void setfechaNacimiento(Date fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
     }
 
     public void setCaracteristicas(String caracteristicas) {
@@ -177,15 +190,15 @@ public class Cliente implements Serializable{
         return sexo;
     }
 
-    public int getEdad() {
-        return edad;
+    public Date getfechaNacimiento() {
+        return fechaNacimiento;
     }
 
     public String getCaracteristicas() {
         return caracteristicas;
     }
 
-    public String getFechaCreacion() {
+    public Date getFechaCreacion() {
         return fechaCreacion;
     }
 

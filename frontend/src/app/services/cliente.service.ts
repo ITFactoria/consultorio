@@ -5,6 +5,7 @@ import { map, catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import  Swal  from "sweetalert2";
 import { Router } from "@angular/router";
+import { Cliente } from '../clases/cliente';
 
 
 @Injectable({
@@ -20,6 +21,10 @@ export class ClienteService {
 
   getCliente(idCliente: string){
     return this._httpClient.get<Icliente>(`${this.urlBackend}clientes/${idCliente}`).pipe(
+      map(response =>{
+        //let cliente = response;
+        return response;
+      }),
       catchError(e =>{
         this._router.navigate(['/clientes']);
         console.error(e.error.mensaje);

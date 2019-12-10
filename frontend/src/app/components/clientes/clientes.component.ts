@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Icliente } from "../../interfaces/icliente";
 import { ClientesService } from "../../services/clientes.service";
 import { Router } from "@angular/router";
 import Swal from 'sweetalert2';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+
 
 
 
@@ -19,18 +22,19 @@ export class ClientesComponent implements OnInit {
   flagClienteEliminado = false;
   flagProblemasTecnicos = false;
 
+  displayedColumns: string[] = ['idCliente', 'nombres', 'apellidos', 'municipio', 'telefono','consultar','eliminar'];
+  dataSource = new MatTableDataSource();
+  //@ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+
+
   constructor(private _clientesService: ClientesService, private _router: Router) { }
 
   ngOnInit() {
 
-    //this.clientes = this._clientesService.getClientes().subscribe();
     this.getClientes();
+    
 
-
-    /*this._clientesService.getClientesPathVariable('chikitina').subscribe(
-      response=>{console.log(response)},
-      error=>{this.handleResponseError(error)});*/
-
+    //this.dataSource.paginator = this.paginator;
   }
 
 
@@ -38,16 +42,13 @@ export class ClientesComponent implements OnInit {
     console.log(error);
     console.log(error.error);
     console.log(error.message);
-
-
-
   }
 
   getClientes() {
     this._clientesService.getClientes().subscribe(
       response => {
-        (console.log(response));
         this.clientes = response;
+        this.dataSource = new MatTableDataSource<Icliente>(this.clientes);
       },
       error => {
         console.log('Error al consultar clientes');
@@ -62,8 +63,7 @@ export class ClientesComponent implements OnInit {
 
 
   getCliente(idCliente: string) {
-    console.log(idCliente);
-    this._router.navigate(['cliente', idCliente]);
+    this._router.navigate(['read-cliente', idCliente]);
 
   }
 
@@ -83,7 +83,7 @@ export class ClientesComponent implements OnInit {
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
       cancelButtonText: 'No, cancelar!',
-      
+
       confirmButtonText: 'Si, eliminarlo!'
     }).then((result) => {
       if (result.value) {
@@ -107,11 +107,5 @@ export class ClientesComponent implements OnInit {
 
   }
 
-  updateCliente(idCliente: string) {
-    console.log(`Actualizar cliente No. ${idCliente}`);
-    this._router.navigate(['cliente', idCliente]);
-
-
-  }
 
 }

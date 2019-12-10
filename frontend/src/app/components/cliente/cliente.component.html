@@ -1,36 +1,171 @@
 <div class="container main-container">
+  <mat-card class="card">
+    <mat-card-header>
+      <mat-card-title class="card-title text-center" *ngIf="flagAccionCliente === 1">Crear Paciente</mat-card-title>
+      <mat-card-title class="card-title text-center" *ngIf="flagAccionCliente === 2">Actualizar Paciente</mat-card-title>
+
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]='formulario' (ngSubmit)='submitForm(formulario)'>
+        <table>
+          <tr>
+            <td>
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Cédula" formControlName="idCliente">
+                <mat-error *ngIf="hasError('idCliente','required')">Campo requerido</mat-error>
+                <mat-error *ngIf="hasError('idCliente','minlength')">Minimo 3 numeros</mat-error>
+                <mat-error *ngIf="hasError('idCliente','pattern')">Campo numerico</mat-error>
+                
+              </mat-form-field>
+
+            </td>
+            <td colspan="2">
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Nombres" formControlName="nombres">
+                <mat-error *ngIf="hasError('nombres','required')">Campo requerido</mat-error>
+                <mat-error *ngIf="hasError('nombres','minlength')">Minimo 3 caracteres</mat-error>
+              </mat-form-field>
+            </td>
+            <td colspan="2">
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Apellidos" formControlName="apellidos">
+                <mat-error *ngIf="hasError('apellidos','required')">Campo requerido</mat-error>
+                <mat-error *ngIf="hasError('apellidos','minlength')">Minimo 3 caracteres</mat-error>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Direcccion" formControlName="direccion">
+                <mat-error *ngIf="hasError('direccion','required')">Campo requerido</mat-error>
+                <mat-error *ngIf="hasError('direccion','minlength')">Minimo 10 caracteres</mat-error>
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Municipio" formControlName="municipio">
+                <mat-error *ngIf="hasError('municipio','required')">Campo requerido</mat-error>
+                <mat-error *ngIf="hasError('municipio','minlength')">Minimo 3 caracteres</mat-error>
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Departamento" formControlName="departamento">
+                <mat-error *ngIf="hasError('departamento','required')">Campo requerido</mat-error>
+                <mat-error *ngIf="hasError('departamento','minlength')">Minimo 3 caracteres</mat-error>
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Telefono" formControlName="telefono">
+                <mat-error *ngIf="hasError('telefono','required')">Campo requerido</mat-error>
+                <mat-error *ngIf="hasError('telefono','minlength')">Minimo 6 numeros</mat-error>
+                <mat-error *ngIf="hasError('telefono','pattern')">Campo numerico</mat-error>
+                
+
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Email" formControlName="email">
+                <mat-error *ngIf="hasError('email','pattern')">Email invalido</mat-error>
+             
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field class="example-full-width">
+                <input matInput [matDatepicker]="picker" placeholder="Fecha de Nacimiento"
+                  formControlName="fechaNacimiento">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error *ngIf="hasError('email','required')">Campo requerido</mat-error>
+                <mat-error *ngIf="hasError('email','minlength')">Minimo 6 caracteres</mat-error>
+              </mat-form-field>
+              <!-- <mat-form-field class="example-full-width">
+                <input matInput placeholder="Fecha Nacimiento" formControlName="fechaNacimiento">
+              </mat-form-field> -->
+            </td>
+
+            <td>
+              <label>Sexo</label><br>
+              <mat-radio-group formControlName="sexo">
+                <mat-radio-button value="M">Hombre</mat-radio-button>
+                <mat-radio-button value="F">Mujer</mat-radio-button>
+                <mat-error *ngIf="hasError('sexo','required')">Campo requerido</mat-error>
+                <mat-error *ngIf="hasError('sexo','minlength')">Minimo 1 caracteres</mat-error>
+              </mat-radio-group>
+              <!-- <mat-form-field class="example-full-width">
+                <input matInput placeholder="Sexo" formControlName="sexo">
+              </mat-form-field> -->
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Sintomatologia" formControlName="caracteristicas">
+                <mat-error *ngIf="hasError('caracteristicas','required')">Campo requerido</mat-error>
+                <mat-error *ngIf="hasError('caracteristicas','minlength')">Minimo 6 caracteres</mat-error>
+
+              </mat-form-field>
+            </td>
+          </tr>
+        </table>
+        <mat-grid-list cols="2" rowHeight="5:1">
+          <mat-grid-tile>
+            <!-- <button mat-raised-button color="primary" [disabled]="!formulario.valid || flagAccionCliente == 1">Guardar</button> -->
+            <button mat-raised-button color="primary" [disabled]="!formulario.valid">Guardar</button>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <button mat-raised-button color="primary" [routerLink]="['/clientes']">Regresar</button>
+          </mat-grid-tile>
+        </mat-grid-list>
+
+        
+      </form>
+    </mat-card-content>
+    <mat-card-actions>
+
+
+    </mat-card-actions>
+  </mat-card>
+
+</div>
+
+
+<div class="container main-container">
 
   <div class="card border-info mb-3">
     <!-- <div class="card-header">Consulta de cliente</div> -->
     <div class="card-body text-info">
-      <h5 class="card-title" *ngIf="flagAccionCliente === 1">Adicionar Cliente</h5>
-      <h5 class="card-title" *ngIf="flagAccionCliente === 2">Consultar Cliente</h5>
-      <h5 class="card-title" *ngIf="flagAccionCliente === 3">Actualizar Cliente</h5>
-
-      <div class="alert alert-success" role="alert" *ngIf="flagAccionCliente==1 && flagOperacionExitosa==true">
+    
+      <!-- <div class="alert alert-success" role="alert" *ngIf="flagAccionCliente==1 && flagOperacionExitosa==true">
         {{userMessage}}
       </div>
       <div class="alert alert-danger" role="alert" *ngIf="flagAccionCliente==1 && flagOperacionExitosa==false">
         {{userMessage}}
       </div>
       <div class="alert alert-success" role="alert" *ngIf="flagAccionCliente==3 && flagOperacionExitosa==true">
-          {{userMessage}}
-        </div>
-        <div class="alert alert-danger" role="alert" *ngIf="flagAccionCliente==3 && flagOperacionExitosa==false">
-          {{userMessage}}
-        </div>
-  
+        {{userMessage}}
+      </div>
+      <div class="alert alert-danger" role="alert" *ngIf="flagAccionCliente==3 && flagOperacionExitosa==false">
+        {{userMessage}}
+      </div> -->
+
 
 
       <br>
-
-      <form [formGroup]='formulario' (ngSubmit)='submitForm(formulario)'>
+      <!-- <div>
+              <form [formGroup]='formulario' (ngSubmit)='submitForm(formulario)'>
 
         <div class="form-row">
 
           <div class="form-group col-md-2">
             <label for="idCliente">C&eacute;dula</label>
-            <input type="text" class="form-control" placeholder="Cedula" formControlName="idCliente">
+            <input type="text" class="form-control" placeholder="Cédula" formControlName="idCliente">
+
             <div class="alert-danger"
               *ngIf="formulario.get('idCliente').invalid && (formulario.get('idCliente').dirty || formulario.get('idCliente').touched)">
               <div *ngIf="formulario.get('idCliente').errors.required">
@@ -72,11 +207,11 @@
           </div>
         </div>
 
-        <!-- Segunda Linea -->
+        Segunda Linea
         <div class="form-row">
           <div class="form-group col-md-8">
             <div class="form-group">
-              <label for="direccion">Direcci&oacute;n</label>
+              <label for="direccion">Dirección</label>
               <input type="text" class="form-control" placeholder="Direccion" formControlName="direccion">
               <div class="alert-danger"
                 *ngIf="formulario.get('direccion').invalid && (formulario.get('direccion').dirty || formulario.get('direccion').touched)">
@@ -115,11 +250,11 @@
 
         </div>
 
-        <!-- Tercera linea -->
+        Tercera linea
         <div class="form-row">
           <div class="form-group col-md-3">
-            <label for="telefono">Tel&eacute;fono</label>
-            <input type="text" class="form-control" placeholder="Telefono" formControlName="telefono">
+            <label for="telefono">Teléfono</label>
+            <input type="text" class="form-control" placeholder="Teléfono" formControlName="telefono">
             <div class="alert-danger"
               *ngIf="formulario.get('telefono').invalid && (formulario.get('telefono').dirty || formulario.get('telefono').touched)">
               <div *ngIf="formulario.get('telefono').errors.required">
@@ -132,7 +267,7 @@
           </div>
 
           <div class="form-group col-md-6">
-            <label for="email">Email</label>
+            <label for="email">Correo</label>
             <input type="email" class="form-control" placeholder="Email" formControlName="email">
             <div class="alert-danger"
               *ngIf="formulario.get('email').invalid && (formulario.get('email').dirty || formulario.get('email').touched)">
@@ -147,7 +282,13 @@
 
           <div class="form-group col-md-2">
             <label for="sexo">Sexo</label>
-            <input type="text" class="form-control" placeholder="Sexo" formControlName="sexo">
+
+            <select name="sexo" id="sexo" placeholder="Sexo" class="form-control">
+              <option value="S">Seleccionar...</option>
+              <option value="M">Mujer</option>
+              <option value="F">Hombre</option>
+            </select>
+
             <div class="alert-danger"
               *ngIf="formulario.get('sexo').invalid && (formulario.get('sexo').dirty || formulario.get('sexo').touched)">
               <div *ngIf="formulario.get('sexo').errors.required">
@@ -175,13 +316,12 @@
 
         </div>
 
-
-
-
+        Cuarta linea
         <div class="form-row">
           <div class="form-group col-md-12">
-            <label for="caracteristicas">Caracterizacion paciente</label>
-            <textarea class="form-control" rows="3" formControlName="caracteristicas"></textarea>
+            <label for="caracteristicas">Sintomatología</label>
+            <textarea class="form-control" rows="3" formControlName="caracteristicas"
+              placeholder="Sintomatología"></textarea>
           </div>
         </div>
 
@@ -202,6 +342,10 @@
         </div>
 
       </form>
+
+
+      </div> -->
+
     </div>
   </div>
   {{formulario.valid}}

@@ -19,8 +19,8 @@ public class Clientes {
     private static List<Cliente> clientes = new ArrayList();
     private static int idCounter = 0;
     
-    static{
-        clientes.add(new Cliente("79514933", "malcom arturo", "conzales lizarazo", "carrara 13 calle 45 67", "Barbosa","Antioquia","12345678","correo@gmail.com","M",63,"Gripa", "1/13/1969"));
+    /*static{
+        clientes.add(new Cliente("79514933", "malcom arturo", "conzales lizarazo", "carrara 13 calle 45 67", "Barbosa","Antioquia","12345678","correo@gmail.com","M","1969/01/13","Gripa", "1/13/1969"));
         clientes.add(new Cliente("32468770", "maria concepcion", "pibe valderrama", "carrara 13 calle 45 67",  "Barbosa","Antioquia","12345678","correo@gmail.com","M",33,"Gripa", "1/13/1969"));
         clientes.add(new Cliente("8906523120", "claudia liliana", "redy rincon", "carrara 13 calle 45 67",  "Itagui","Antioquia","12345678","correo@gmail.com","M",33,"Tuberculosis", "11/01/1969"));
         clientes.add(new Cliente("1234567890123", "yormary xiloedi", "conzales lizarazo", "carrara 13 calle 45 67",  "Sabaneta","Antioquia","12345678", "correo@gmail.com","M",33,"Tuberculosis","11/01/1969"));
@@ -32,7 +32,7 @@ public class Clientes {
         clientes.add(new Cliente("13131313", "platano verde", "chorizo chicharron", "carrara 13 calle 45 67", "Rionegro","Antioquia","12345678","correo@gmail.com","M",33,"Tuberculosis", "11/01/1969"));
         
         
-    }
+    }*/
     
     public List<Cliente> getClientes(){
         return clientes;

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #4cbccf;">
+<!-- <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #4cbccf;">
   <a class="navbar-brand" [routerLink]="['/home']">Consultorio</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -8,12 +8,12 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/home']" routerLinkActive="router-link-active">Home<span
+        <a class="nav-link" [routerLink]="['/home']" routerLinkActive="router-link-active">Consultorio<span
             class="sr-only">(current)</span></a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/clientes']" routerLinkActive="router-link-active">Clientes<span
+        <a class="nav-link" [routerLink]="['/clientes']" routerLinkActive="router-link-active">Pacientes<span
             class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
@@ -21,21 +21,22 @@
             class="sr-only"></span></a>
       </li>
     </ul>
-
-    <button class="btn btn-ligth" [routerLink]="['/login']" type="submit">Ingresar</button>
-    
-    <button class="btn btn-ligth" [routerLink]="['/login']" type="submit">Salir</button>
-    
-
-    
-
-
-
-
-    <!-- <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form> -->
-
   </div>
-</nav>
+</nav> -->
+
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <!-- <button mat-icon-button>
+      <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
+    </button> -->
+    <span class="menu-spacer"></span>
+    <div>
+      <a mat-button [routerLink]="'/home'"> Consultorio</a>
+      <a mat-button [routerLink]="'/clientes'"> Pacientes</a>
+      <a mat-button [routerLink]="'/consultas'"> Consultas </a>
+      
+    </div>
+  </mat-toolbar-row>
+
+
+</mat-toolbar>

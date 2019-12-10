@@ -1,30 +1,49 @@
 <div class="container main-container">
-    <div class="card-deck animated fadeIn">
-        <div class="card text-white bg-info mb-3">
-          <img src="../../assets/img/icons8-therapy-480.png" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Clientes</h5>
-            <p class="card-text">Administracion de clientes</p>
-            <button type="button" class="btn btn-info btn-block" (click)="consultarClientes()">Ver mas...</button>
-          </div>
-        </div>
-        <div class="card text-white bg-info mb-3">
-          <img src="../../assets/img/icons8-treatment-80.png" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Consultas</h5>
-            <p class="card-text">Administracion de consultas</p>
-            <button type="button" class="btn btn-info btn-block" (click)="consultarConsultas()">Ver mas...</button>
-          </div>
-        </div>
-        <div class="card text-white bg-info mb-3">
-          <img src="../../assets/img/icons8-treatment-80.png" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Inventario</h5>
-            <p class="card-text">Administracion de Inventarios</p>
-            <button type="button" class="btn btn-info btn-block">Ver mas...</button>
-          </div>
-        </div>
+  <div>
+    <mat-grid-list cols="2" rowHeight="2:1">
+      <mat-grid-tile>
+
+        <mat-card class="example-card">
+          <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title>Gestión de Pacientes</mat-card-title>
+            <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+          </mat-card-header>
+          <img mat-card-lg-image src="../../assets/img/clientes.png" alt="pacientes">
+          <mat-card-actions>
+            <button mat-raised-button color="primary" (click)="consultarPacientes()" class="dashboard-card-content">Gestionar Pacientes</button>
+          </mat-card-actions>
+        </mat-card>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-card class="example-card">
+          <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title>Gestión de Consultas</mat-card-title>
+          </mat-card-header>
+          <img mat-card-lg-image src="../../assets/img/consulta1.png" alt="consultas">
+          <mat-card-actions >
+            <button mat-raised-button color="primary"  (click)="consultarConsultas()">Gestionar Consultas</button>
+          </mat-card-actions>
+        </mat-card>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+  <br>
+
+  <!-- <div class="card-deck">
+    <div class="card text-white bg-info mb-3 text-center" style="max-width: 18rem;">
+      <img src="../../assets/img/clientes.png" class="card-img-top" alt="...">
+      <div class="card-body">
+        <button type="button" class="btn btn-info btn-lg" (click)="consultarClientes()">Gestión de Pacientes</button>
       </div>
-
+    </div>
+    <div class="card text-white bg-info mb-3 text-center" style="max-width: 18rem;">
+      <img src="../../assets/img/consulta1.png" class="card-img-top" alt="...">
+      <div class="card-body">
+        <button type="button" class="btn btn-info btn-lg" (click)="consultarConsultas()">Gestión de Consultas</button>
+      </div>
+    </div>
+  </div> -->
 </div>
-

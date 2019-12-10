@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
+import { MatCardModule } from "@angular/material/card";
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatDatepickerModule } from "@angular/material/datepicker";
+
+
 
 @Component({
   selector: 'app-home',
@@ -20,7 +25,7 @@ username: String;
 
   }
 
-  consultarClientes(){
+  consultarPacientes(){
     this._router.navigate(['clientes']);
 
   }

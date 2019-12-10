@@ -90,7 +90,7 @@ public class ClienteRestController {
         }
 
         try {
-            cliente.setFechaCreacion((new Date().toString()));
+            cliente.setFechaCreacion(new Date());
             clienteNuevo = clienteService.save(cliente);
 
         } catch (DataAccessException e) {
@@ -164,7 +164,7 @@ public class ClienteRestController {
                 clienteActual.setDepartamento(cliente.getDepartamento());
                 clienteActual.setTelefono(cliente.getTelefono());
                 clienteActual.setEmail(cliente.getEmail());
-                clienteActual.setEdad(cliente.getEdad());
+                clienteActual.setfechaNacimiento(cliente.getfechaNacimiento());
                 clienteActual.setCaracteristicas(cliente.getCaracteristicas());
                 clienteActual.setSexo(cliente.getSexo());
                 clienteActualizado = clienteService.save(clienteActual);

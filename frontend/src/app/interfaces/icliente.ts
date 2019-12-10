@@ -8,7 +8,7 @@ export interface Icliente {
     telefono: string;
     email: string;
     sexo: string;
-    edad: number;
+    fechaNacimiento: string;
     caracteristicas: string;
     fechaCreacion: string;
 

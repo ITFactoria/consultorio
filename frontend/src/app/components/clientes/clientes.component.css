@@ -1,0 +1,23 @@
+table {
+    width: 100%;
+    text-align: center;
+  }
+
+.customer-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+.example-full-width {
+    width: 100%;
+  }
+  
+td {
+    padding-right: 8px;
+  }
+
+.header{
+  text-align: center
+  th.mat-header-cell
+}
