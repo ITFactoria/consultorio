@@ -6,6 +6,7 @@
 package com.itfactoria.rest.webservices.restfulwebservices.controllers;
 
 import com.itfactoria.rest.webservices.restfulwebservices.models.entity.Cliente;
+import com.itfactoria.rest.webservices.restfulwebservices.models.entity.Municipio;
 import com.itfactoria.rest.webservices.restfulwebservices.models.services.IClienteService;
 import java.time.Clock;
 import java.util.Date;
@@ -181,6 +182,12 @@ public class ClienteRestController {
 
         }
 
+    }
+    
+    @GetMapping("/clientes/municipios")
+    public List<Municipio>listMunicipios(){
+        return clienteService.findAllMunicipios();
+    
     }
 
 }

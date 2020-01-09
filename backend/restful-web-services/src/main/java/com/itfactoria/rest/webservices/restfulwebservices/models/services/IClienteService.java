@@ -6,6 +6,7 @@
 package com.itfactoria.rest.webservices.restfulwebservices.models.services;
 
 import com.itfactoria.rest.webservices.restfulwebservices.models.entity.Cliente;
+import com.itfactoria.rest.webservices.restfulwebservices.models.entity.Municipio;
 import java.util.List;
 
 /**
@@ -17,5 +18,7 @@ public interface IClienteService {
     public Cliente findById(String idCliente);
     public void delete(String idCliente);
     public Cliente save(Cliente cliente);
+    
+    public List<Municipio>findAllMunicipios();
     
 }

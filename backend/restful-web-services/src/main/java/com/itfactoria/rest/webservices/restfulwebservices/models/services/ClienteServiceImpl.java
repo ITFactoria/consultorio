@@ -7,6 +7,7 @@ package com.itfactoria.rest.webservices.restfulwebservices.models.services;
 
 import com.itfactoria.rest.webservices.restfulwebservices.models.dao.IClienteDAO;
 import com.itfactoria.rest.webservices.restfulwebservices.models.entity.Cliente;
+import com.itfactoria.rest.webservices.restfulwebservices.models.entity.Municipio;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,6 +47,13 @@ public class ClienteServiceImpl implements IClienteService {
         return clienteDAO.save(cliente);
         
     
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Municipio> findAllMunicipios() {
+        return clienteDAO.findAllMunicipios();
+        
     }
 
 }

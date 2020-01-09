@@ -5,15 +5,18 @@
  */
 package com.itfactoria.rest.webservices.restfulwebservices.models.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
 import static javax.persistence.TemporalType.DATE;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -45,10 +48,13 @@ public class Cliente implements Serializable{
     @Size(min=4, max=100)
     private String direccion;
     
-    @NotEmpty
+    @NotNull(message="El Municipo es requerido")
     @Size(min=4, max=100)
-    @Column(nullable = false)       
-    private String municipio;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "municipio_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
+    private Municipio municipio;
+    //private String municipio;
     
     @NotEmpty
     @Size(min=4, max=100)
@@ -76,6 +82,8 @@ public class Cliente implements Serializable{
     @Temporal(DATE)
     private Date fechaCreacion;
     
+    //private Municipio municipio;
+    
     /*@NotEmpty
     private String fechaCreacion;
     */
@@ -91,7 +99,7 @@ public class Cliente implements Serializable{
     
     
 
-    public Cliente(String idCliente, String nombres, String apellidos, String direccion, String municipio, String departamento, String telefono, String email, String sexo, Date fechaNacimiento, String caracteristicas, Date fechaCreacion) {
+    public Cliente(String idCliente, String nombres, String apellidos, String direccion, Municipio municipio, String departamento, String telefono, String email, String sexo, Date fechaNacimiento, String caracteristicas, Date fechaCreacion) {
         this.idCliente = idCliente;
         this.nombres = nombres;
         this.apellidos = apellidos;
@@ -126,7 +134,7 @@ public class Cliente implements Serializable{
         this.telefono = telefono;
     }
 
-    public void setMunicipio(String municipio) {
+    public void setMunicipio(Municipio municipio) {
         this.municipio = municipio;
     }
 
@@ -174,7 +182,7 @@ public class Cliente implements Serializable{
         return telefono;
     }
 
-    public String getMunicipio() {
+    public Municipio getMunicipio() {
         return municipio;
     }
 
