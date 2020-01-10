@@ -8,7 +8,9 @@ import {  MatGridListModule,
           MatRadioModule,
           MatDatepickerModule,
           MatNativeDateModule, 
-          MatToolbarModule } from "@angular/material";
+          MatToolbarModule, 
+          MatSelectBase,
+          MatSelectModule} from "@angular/material";
 
 @NgModule({
   declarations: [],
@@ -22,7 +24,8 @@ import {  MatGridListModule,
     MatRadioModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatSelectModule
 
   ],
   exports:[
@@ -34,7 +37,8 @@ import {  MatGridListModule,
     MatRadioModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatSelectModule
 
   ]
 })

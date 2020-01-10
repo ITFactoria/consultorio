@@ -42,13 +42,24 @@
                 <mat-error *ngIf="hasError('direccion','minlength')">Minimo 10 caracteres</mat-error>
               </mat-form-field>
             </td>
-            <td>
+            <!-- <td>
               <mat-form-field class="example-full-width">
                 <input matInput placeholder="Municipio" formControlName="municipio">
                 <mat-error *ngIf="hasError('municipio','required')">Campo requerido</mat-error>
                 <mat-error *ngIf="hasError('municipio','minlength')">Minimo 3 caracteres</mat-error>
               </mat-form-field>
+            </td> -->
+            <td>
+              <mat-form-field class="example-full-width">
+                <mat-label>Municipio</mat-label>
+                <mat-select formControlName="municipio">
+                  <mat-option *ngFor="let municipio of municipios" [value]="municipio">{{municipio.nombre}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="hasError('municipio','required')">Campo requerido</mat-error>
+                <mat-error *ngIf="hasError('municipio','minlength')">Minimo 3 caracteres</mat-error>
+              </mat-form-field>
             </td>
+            
             <td>
               <mat-form-field class="example-full-width">
                 <input matInput placeholder="Departamento" formControlName="departamento">

@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
-import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { FormGroup, FormControl, Validators, FormBuilder } from "@angular/forms";
 import { ClienteService } from "../../services/cliente.service";
 import { Icliente } from 'src/app/interfaces/icliente';
 import swal from 'sweetalert2';
 import { DatePipe } from '@angular/common';
+import { Municipio } from 'src/app/clases/municipio';
+
 
 @Component({
   selector: 'app-cliente',
@@ -15,7 +17,11 @@ export class ClienteComponent implements OnInit {
 
   idCliente: string;
   formulario: FormGroup;
+
   cliente: Icliente;
+  municipio: Municipio;
+  municipios : Municipio[];
+
   userMessage : string;
   flagOperacionExitosa = false;
   errores : string[];
@@ -29,16 +35,28 @@ export class ClienteComponent implements OnInit {
   flagAccionCliente: number;
 
 
-  constructor(private _activatedRoute: ActivatedRoute, private _clienteService: ClienteService, private _router: Router, private _datePipe: DatePipe) { }
+  constructor(
+    private _activatedRoute: ActivatedRoute, 
+    private _clienteService: ClienteService, 
+    private _router: Router, 
+    private _datePipe: DatePipe,
+    private _fb: FormBuilder) { 
+    
+  }
 
   ngOnInit() {
     this.idCliente = this._activatedRoute.snapshot.params['idCliente'];
-    this.formulario = new FormGroup({
+    
+    /*this.formulario = new FormGroup({
       'idCliente': new FormControl('', [Validators.required, Validators.minLength(3),Validators.pattern('^[0-9]+$')]),
       'nombres': new FormControl('', [Validators.required, Validators.minLength(3)]),
       'apellidos': new FormControl('', [Validators.required, Validators.minLength(3)]),
       'direccion': new FormControl('', [Validators.required, Validators.minLength(10)]),
       'municipio': new FormControl('', [Validators.required, Validators.minLength(3)]),
+      'municipio1' : new FormGroup({
+        'id': new FormControl(),
+        'nombre' : new FormControl()
+      }),
       'departamento': new FormControl('', [Validators.required, Validators.minLength(3)]),
       'telefono': new FormControl('', [Validators.required, Validators.minLength(6),Validators.pattern('^[0-9]+$')]),
       'email': new FormControl('',Validators.pattern(('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$'))),
@@ -46,8 +64,28 @@ export class ClienteComponent implements OnInit {
       'fechaNacimiento': new FormControl('', [Validators.required, Validators.minLength(6)]),
       'caracteristicas': new FormControl(),
       'fechaCreacion': new FormControl(),
+    })*/
 
+    this.formulario = this._fb.group({
+      idCliente: ['', [Validators.required, Validators.minLength(3),Validators.pattern('^[0-9]+$')]],
+      nombres: ['', [Validators.required, Validators.minLength(3)]],
+      apellidos: ['', [Validators.required, Validators.minLength(3)]],
+      direccion: ['', [Validators.required, Validators.minLength(10)]],
+      municipio: ['', [Validators.required, Validators.minLength(3)]],
+      /*municipio : this._fb.group({
+        id: [],
+        nombre : []
+      }),*/
+      departamento: ['', [Validators.required, Validators.minLength(3)]],
+      telefono: ['', [Validators.required, Validators.minLength(6),Validators.pattern('^[0-9]+$')]],
+      email: ['',Validators.pattern(('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$'))],
+      sexo: ['', [Validators.required, Validators.minLength(1)]],
+      fechaNacimiento: ['', [Validators.required, Validators.minLength(6)]],
+      caracteristicas: [],
+      fechaCreacion: [],
     })
+    
+
 
 
 
@@ -62,6 +100,8 @@ export class ClienteComponent implements OnInit {
       console.log(`Actualizar Cliente No. ${this.idCliente}`);
       this.flagAccionCliente = 2;
       this.getCliente(this.idCliente);
+      this.getMunicipios();
+      
       
       /*this.formulario.controls.idCliente.disable();
       this.formulario.controls.nombres.disable();
@@ -88,12 +128,28 @@ export class ClienteComponent implements OnInit {
       response => {
         this.cliente = response;
         this.formulario.setValue(this.cliente);
+        console.log("nunucipio");
+    
+        console.log(this.cliente.municipio.nombre);
+    
        
       },
       error => { }
 
     )
 
+  }
+
+  getMunicipios(){
+    console.log("gerMunicipios");
+    this._clienteService.getMunicipios().subscribe(
+      response =>{
+        console.log(response);
+        this.municipios = response;
+        
+
+      }
+    )
   }
 
   

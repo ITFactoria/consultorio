@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { ClienteService } from "../../services/cliente.service";
 import { Icliente } from 'src/app/interfaces/icliente';
 import swal from 'sweetalert2';
-import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { FormGroup, FormControl, Validators, FormBuilder } from "@angular/forms";
 
 
 
@@ -19,12 +19,32 @@ export class ReadClienteComponent implements OnInit {
 
 
 
-  constructor(private _activatedRoute: ActivatedRoute, private _clienteService: ClienteService, private _router: Router) { }
+  constructor(
+    private _activatedRoute: ActivatedRoute, 
+    private _clienteService: ClienteService, 
+    private _router: Router, 
+    private _fb: FormBuilder) { }
 
   ngOnInit() {
     this.idCliente = this._activatedRoute.snapshot.params['idCliente'];
     this.getCliente(this.idCliente);
-    this.formulario = new FormGroup({
+    this.formulario = this._fb.group({
+      idCliente: ['', [Validators.required, Validators.minLength(3),Validators.pattern('^[0-9]+$')]],
+      nombres: ['', [Validators.required, Validators.minLength(3)]],
+      apellidos: ['', [Validators.required, Validators.minLength(3)]],
+      direccion: ['', [Validators.required, Validators.minLength(10)]],
+      municipio: ['', [Validators.required, Validators.minLength(3)]],
+      departamento: ['', [Validators.required, Validators.minLength(3)]],
+      telefono: ['', [Validators.required, Validators.minLength(6),Validators.pattern('^[0-9]+$')]],
+      email: ['',Validators.pattern(('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$'))],
+      sexo: ['', [Validators.required, Validators.minLength(1)]],
+      fechaNacimiento: ['', [Validators.required, Validators.minLength(6)]],
+      caracteristicas: [],
+      fechaCreacion: [],
+    })
+    
+    
+    /*this.formulario = new FormGroup({
       'idCliente': new FormControl('', [Validators.required, Validators.minLength(3)]),
       'nombres': new FormControl('', [Validators.required, Validators.minLength(3)]),
       'apellidos': new FormControl('', [Validators.required, Validators.minLength(3)]),
@@ -38,7 +58,8 @@ export class ReadClienteComponent implements OnInit {
       'caracteristicas': new FormControl(),
       'fechaCreacion': new FormControl(),
 
-    })
+    })*/
+
 
 
   }

@@ -33,7 +33,10 @@
             </td>
             <td>
               <mat-form-field class="example-full-width">
-                <input matInput placeholder="Municipio" formControlName="municipio">
+                <mat-label>Municipio</mat-label>
+                <mat-select formControlName="municipio">
+                  <mat-option *ngFor="let municipio of municipios" [value]="municipio">{{municipio.nombre}}</mat-option>
+                </mat-select>
               </mat-form-field>
             </td>
             <td>

@@ -6,6 +6,7 @@ import { throwError } from 'rxjs';
 import  Swal  from "sweetalert2";
 import { Router } from "@angular/router";
 import { Cliente } from '../clases/cliente';
+import { Municipio } from '../clases/municipio';
 
 
 @Injectable({
@@ -60,6 +61,10 @@ export class ClienteService {
         return throwError(e);
       })
     );
+  }
+
+  getMunicipios(){
+    return this._httpClient.get<Municipio[]>(`${this.urlBackend}clientes/municipios`)
   }
 }
 

@@ -1,9 +1,11 @@
+import { Municipio } from "../clases/municipio";
+
 export interface Icliente {
     idCliente: string;
     nombres: string;
     apellidos: string;
     direccion : string;
-    municipio: string;
+    municipio: Municipio;
     departamento: string;
     telefono: string;
     email: string;
