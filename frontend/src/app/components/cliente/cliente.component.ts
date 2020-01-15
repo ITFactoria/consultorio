@@ -40,9 +40,7 @@ export class ClienteComponent implements OnInit {
     private _clienteService: ClienteService, 
     private _router: Router, 
     private _datePipe: DatePipe,
-    private _fb: FormBuilder) { 
-    
-  }
+    private _fb: FormBuilder) {}
 
   ngOnInit() {
     this.idCliente = this._activatedRoute.snapshot.params['idCliente'];
@@ -93,6 +91,7 @@ export class ClienteComponent implements OnInit {
       //Adicionar Cliente
       console.log('Adicionar Cliente');
       this.flagAccionCliente = 1;
+      this.getMunicipios();
       console.log(this.flagAccionCliente);
     }
     else {
@@ -235,6 +234,11 @@ export class ClienteComponent implements OnInit {
 
     }
 
+
+  }
+
+  compararMunicipio(o1: Municipio, o2: Municipio){
+    return o1===null || o2===null? false: o1.id===o2.id;
 
   }
 

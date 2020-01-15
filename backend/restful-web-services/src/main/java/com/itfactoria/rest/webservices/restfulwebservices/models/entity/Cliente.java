@@ -7,13 +7,17 @@ package com.itfactoria.rest.webservices.restfulwebservices.models.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -49,7 +53,7 @@ public class Cliente implements Serializable{
     private String direccion;
     
     @NotNull(message="El Municipo es requerido")
-    @Size(min=4, max=100)
+    //@Size(min=4, max=100)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "municipio_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
@@ -82,7 +86,12 @@ public class Cliente implements Serializable{
     @Temporal(DATE)
     private Date fechaCreacion;
     
-    //private Municipio municipio;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "cliente", cascade = CascadeType.ALL)
+    //@JoinColumn(name="cita_id")
+    @JsonIgnoreProperties({"cliente","hibernateLazyInitializer","handler"})
+    private List<Cita> citas;
+    
+    
     
     /*@NotEmpty
     private String fechaCreacion;
@@ -95,6 +104,7 @@ public class Cliente implements Serializable{
     
     
     public Cliente() {
+        this.citas = new ArrayList();
     }
     
     
@@ -209,5 +219,16 @@ public class Cliente implements Serializable{
     public Date getFechaCreacion() {
         return fechaCreacion;
     }
+
+    public List<Cita> getCitas() {
+        return citas;
+    }
+
+    public void setCitas(List<Cita> citas) {
+        this.citas = citas;
+    }
+
+    
+    
 
 }

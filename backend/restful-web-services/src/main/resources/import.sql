@@ -20,3 +20,13 @@ insert into clientes(id_cliente, nombres, apellidos, direccion,municipio_id,depa
 insert into clientes(id_cliente, nombres, apellidos, direccion,municipio_id,departamento,telefono,email,sexo,fecha_nacimiento,caracteristicas,fecha_Creacion) values ('12121211','eusebio tortuga', 'amazonas tumaco', 'avendida nore carrera sur', 1,'antioquia', '3102345678', 'chikis@gmail.com', 'F', '1979-01-30','dolor cabeza', '2019-01-13');
 insert into clientes(id_cliente, nombres, apellidos, direccion,municipio_id,departamento,telefono,email,sexo,fecha_nacimiento,caracteristicas,fecha_Creacion) values ('678976384','gulupa guayaba', 'papaya chontaduro', 'avendida nore carrera sur', 2,'antioquia', '3102345678', 'chikis@gmail.com', 'F', '1979-01-30','dolor cabeza', '2019-01-13');
 insert into clientes(id_cliente, nombres, apellidos, direccion,municipio_id,departamento,telefono,email,sexo,fecha_nacimiento,caracteristicas,fecha_Creacion) values ('54545445','chonto perol3', 'papaya chontaduro', 'avendida nore carrera sur', 3,'antioquia', '3102345678', 'chikis@gmail.com', 'F', '1979-03-30','dolor cabeza', '2019-01-13');
+
+/*Populate tabla citas*/
+insert into citas(id, fecha, hora, valor, fecha_Creacion, cliente_id) values (1,'1979-03-30','08:00:00',33000,'2020-01-13','79514933');
+insert into citas(id, fecha, hora, valor, fecha_Creacion, cliente_id) values (2,'1979-03-30','08:30:00',66000,'2020-01-13','79514933');
+insert into citas(id, fecha, hora, valor, fecha_Creacion, cliente_id) values (3,'1979-03-30','09:00:00',99000,'2020-01-13','79514933');
+insert into citas(id, fecha, hora, valor, fecha_Creacion, cliente_id) values (4,'1979-03-30','08:00:00',33000,'2020-01-13','12312345');
+insert into citas(id, fecha, hora, valor, fecha_Creacion, cliente_id) values (5,'1979-03-30','08:30:00',66000,'2020-01-13','12312345');
+insert into citas(id, fecha, hora, valor, fecha_Creacion, cliente_id) values (6,'1979-03-30','09:00:00',99000,'2020-01-13','678976379');
+
+

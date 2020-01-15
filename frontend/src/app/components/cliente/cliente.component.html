@@ -52,7 +52,7 @@
             <td>
               <mat-form-field class="example-full-width">
                 <mat-label>Municipio</mat-label>
-                <mat-select formControlName="municipio">
+                <mat-select formControlName="municipio" [compareWith] ="compararMunicipio"> 
                   <mat-option *ngFor="let municipio of municipios" [value]="municipio">{{municipio.nombre}}</mat-option>
                 </mat-select>
                 <mat-error *ngIf="hasError('municipio','required')">Campo requerido</mat-error>
