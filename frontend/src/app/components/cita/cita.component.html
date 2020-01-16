@@ -1,0 +1,23 @@
+<div class="container main-container">
+
+  <mat-card class="card">
+    <mat-card-content>
+
+      <form [formGroup]='formulario'>
+        <mat-grid-list cols="2" rowHeight="2:1">
+          <mat-grid-tile>
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Cédula" formControlName="idCliente">
+              <mat-error *ngIf="hasError('idCliente','required')">Campo requerido</mat-error>
+              <mat-error *ngIf="hasError('idCliente','minlength')">Minimo 3 numeros</mat-error>
+              <mat-error *ngIf="hasError('idCliente','pattern')">Campo numerico</mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <button mat-raised-button color="primary" [disabled]="!formulario.valid" (click) = "getCliente(idCliente)">Consultar</button>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

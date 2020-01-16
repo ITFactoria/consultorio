@@ -47,11 +47,13 @@ public class ClienteRestController {
     private IClienteService clienteService;
 
     @GetMapping("/clientes")
+    @ResponseStatus(HttpStatus.OK)
     public List<Cliente> index() {
         return clienteService.findAll();
     }
 
     @GetMapping("/clientes/{idCliente}")
+    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<?> show(@PathVariable String idCliente) {
 
         Cliente cliente = null;

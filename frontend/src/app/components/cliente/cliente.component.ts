@@ -113,6 +113,7 @@ export class ClienteComponent implements OnInit {
       this.formulario.controls.sexo.disable();
       this.formulario.controls.fechaNacimiento.disable();
       this.formulario.controls.caracteristicas.disable();*/
+      
 
     }
   }

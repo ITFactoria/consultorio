@@ -25,13 +25,13 @@ username: String;
 
   }
 
-  consultarPacientes(){
+  gestionarPacientes(){
     this._router.navigate(['clientes']);
 
   }
 
-  consultarConsultas(){
-    this._router.navigate(['consultas']);
+  gestionarConsultas(){
+    this._router.navigate(['citas']);
 
   }
 

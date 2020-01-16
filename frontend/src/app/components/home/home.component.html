@@ -1,21 +1,7 @@
 <div class="container main-container">
   <div>
     <mat-grid-list cols="2" rowHeight="2:1">
-      <mat-grid-tile>
-
-        <mat-card class="example-card">
-          <mat-card-header>
-            <div mat-card-avatar class="example-header-image"></div>
-            <mat-card-title>Gestión de Pacientes</mat-card-title>
-            <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
-          </mat-card-header>
-          <img mat-card-lg-image src="../../assets/img/clientes.png" alt="pacientes">
-          <mat-card-actions>
-            <button mat-raised-button color="primary" (click)="consultarPacientes()" class="dashboard-card-content">Gestionar Pacientes</button>
-          </mat-card-actions>
-        </mat-card>
-      </mat-grid-tile>
-
+      
       <mat-grid-tile>
         <mat-card class="example-card">
           <mat-card-header>
@@ -24,26 +10,27 @@
           </mat-card-header>
           <img mat-card-lg-image src="../../assets/img/consulta1.png" alt="consultas">
           <mat-card-actions >
-            <button mat-raised-button color="primary"  (click)="consultarConsultas()">Gestionar Consultas</button>
+            <button mat-raised-button color="primary"  (click)="gestionarConsultas()">Gestionar Consultas</button>
           </mat-card-actions>
         </mat-card>
       </mat-grid-tile>
+      
+      <mat-grid-tile>
+        <mat-card class="example-card">
+          <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title>Gestión de Pacientes</mat-card-title>
+            <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+          </mat-card-header>
+          <img mat-card-lg-image src="../../assets/img/clientes.png" alt="pacientes">
+          <mat-card-actions>
+            <button mat-raised-button color="primary" (click)="gestionarPacientes()" class="dashboard-card-content">Gestionar Pacientes</button>
+          </mat-card-actions>
+        </mat-card>
+      </mat-grid-tile>
+
+      
     </mat-grid-list>
   </div>
   <br>
-
-  <!-- <div class="card-deck">
-    <div class="card text-white bg-info mb-3 text-center" style="max-width: 18rem;">
-      <img src="../../assets/img/clientes.png" class="card-img-top" alt="...">
-      <div class="card-body">
-        <button type="button" class="btn btn-info btn-lg" (click)="consultarClientes()">Gestión de Pacientes</button>
-      </div>
-    </div>
-    <div class="card text-white bg-info mb-3 text-center" style="max-width: 18rem;">
-      <img src="../../assets/img/consulta1.png" class="card-img-top" alt="...">
-      <div class="card-body">
-        <button type="button" class="btn btn-info btn-lg" (click)="consultarConsultas()">Gestión de Consultas</button>
-      </div>
-    </div>
-  </div> -->
 </div>

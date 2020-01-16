@@ -16,7 +16,7 @@ import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { ClientesComponent } from './components/clientes/clientes.component';
 import { NavbarComponent } from './components/navbar/navbar.component'
-import { ConsultasComponent } from './components/consultas/consultas.component';
+import { CitasComponent} from './components/citas/citas.component';
 
 
 //Services
@@ -25,6 +25,7 @@ import { ClienteComponent } from './components/cliente/cliente.component';
 import { ErrorComponent } from './components/error/error.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ReadClienteComponent } from './components/read-cliente/read-cliente.component';
+import { CitaComponent } from './components/cita/cita.component';
 
 
 @NgModule({
@@ -34,11 +35,12 @@ import { ReadClienteComponent } from './components/read-cliente/read-cliente.com
     HomeComponent,
     ClientesComponent,
     NavbarComponent,
-    ConsultasComponent,
+    CitasComponent,
     ClienteComponent,
     ErrorComponent,
     FooterComponent,
-    ReadClienteComponent
+    ReadClienteComponent,
+    CitaComponent
   ],
   imports: [
     BrowserModule,
