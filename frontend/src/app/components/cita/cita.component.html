@@ -1,23 +1,152 @@
 <div class="container main-container">
+  <div>
+    <mat-card class="card">
+      <mat-card-header>
+        <mat-card-title class="card-title text-center">Asignar Cita</mat-card-title>
+      </mat-card-header>
 
-  <mat-card class="card">
-    <mat-card-content>
+      <mat-card-content>
+        <form [formGroup]='formConsultaIdCliente'>
+          <mat-grid-list cols="2" rowHeight="9:1">
+            <mat-grid-tile>
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Cédula" formControlName="idCliente">
+                <mat-error *ngIf="hasError('idCliente','required')">Campo requerido</mat-error>
+                <mat-error *ngIf="hasError('idCliente','minlength')">Minimo 3 numeros</mat-error>
+                <mat-error *ngIf="hasError('idCliente','pattern')">Campo numerico</mat-error>
+              </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile>
+              <button mat-raised-button color="primary" [disabled]="!formConsultaIdCliente.valid"
+                (click)="getCitaContent(idCliente)">Consultar</button>
+            </mat-grid-tile>
+          </mat-grid-list>
 
-      <form [formGroup]='formulario'>
-        <mat-grid-list cols="2" rowHeight="2:1">
-          <mat-grid-tile>
-            <mat-form-field class="example-full-width">
-              <input matInput placeholder="Cédula" formControlName="idCliente">
-              <mat-error *ngIf="hasError('idCliente','required')">Campo requerido</mat-error>
-              <mat-error *ngIf="hasError('idCliente','minlength')">Minimo 3 numeros</mat-error>
-              <mat-error *ngIf="hasError('idCliente','pattern')">Campo numerico</mat-error>
-            </mat-form-field>
-          </mat-grid-tile>
-          <mat-grid-tile>
-            <button mat-raised-button color="primary" [disabled]="!formulario.valid" (click) = "getCliente(idCliente)">Consultar</button>
-          </mat-grid-tile>
-        </mat-grid-list>
-      </form>
-    </mat-card-content>
-  </mat-card>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <br>
+  <div *ngIf="flagClienteExiste">
+    <div>
+      <mat-card class="card">
+        <mat-card-header>
+          <mat-card-title>Información Paciente</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <form [formGroup]='formCliente' (ngSubmit)='submitForm(formulario)'>
+            <mat-grid-list cols="3" rowHeight="6:1">
+              <mat-grid-tile>
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Cédula" formControlName="idCliente">
+                </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile>
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Nombres" formControlName="nombres">
+                </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile>
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Apellidos" formControlName="apellidos">
+                </mat-form-field>
+              </mat-grid-tile>
+            </mat-grid-list>
+            <mat-grid-list cols="4" rowHeight="3:1">
+              <mat-grid-tile>
+                <mat-form-field class="example-full-width">
+                  <mat-label>Municipio</mat-label>
+                  <mat-select formControlName="municipio" [compareWith]="compararMunicipios">
+                    <mat-option *ngFor="let municipio of municipios" [value]="municipio">{{municipio.nombre}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile>
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Telefono" formControlName="telefono">
+                </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile>
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Sexo" formControlName="sexo">
+                </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile>
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Fecha Nacimiento" formControlName="fechaNacimiento">
+                </mat-form-field>
+              </mat-grid-tile>
+            </mat-grid-list>
+            <mat-grid-list cols="1" rowHeight="15:1">
+              <mat-grid-tile>
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Sintomatologia" formControlName="caracteristicas">
+                </mat-form-field>
+              </mat-grid-tile>
+            </mat-grid-list>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <br>
+    <div>
+      <mat-card class="card">
+        <mat-card-header>
+          <mat-card-title class="card-title text-center">Asignar Cita</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <form [formGroup]='formCita'>
+            <mat-grid-list cols="3" rowHeight="10:1">
+              <mat-grid-tile>
+                <mat-form-field class="example-full-width">
+                  <input matInput [matDatepicker]="picker" placeholder="Fecha Cita" formControlName="fechaAsignacion">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                  <mat-error *ngIf="hasErrorFormCita('fechaAsignacion','required')">Campo requerido</mat-error>
+                  <mat-error *ngIf="hasErrorFormCita('fechaAsignacion','minlength')">Minimo 6 caracteres</mat-error>
+                </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile>
+                <button mat-raised-button color="primary" [disabled]="!formCita.valid"
+                  (click)="addCita()">Asignar Cita</button>
+              </mat-grid-tile>
+              <mat-grid-tile>
+                <button mat-raised-button color="primary" type="submit" [routerLink]="['/citas']">Regresar</button>
+              </mat-grid-tile>
+            </mat-grid-list>
+          </form>
+        </mat-card-content>
+      </mat-card>
+
+    </div>
+
+
+  </div>
+
 </div>
+
+<!-- <table>
+  <tr>
+    <td colspan="2">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Direcccion" formControlName="direccion">
+      </mat-form-field>
+    </td>
+
+    <td>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Departamento" formControlName="departamento">
+      </mat-form-field>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Email" formControlName="email">
+      </mat-form-field>
+    </td>
+    <td>
+    </td>
+  </tr>
+</table> -->

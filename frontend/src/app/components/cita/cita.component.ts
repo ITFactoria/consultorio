@@ -1,6 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators, FormBuilder, FormGroup} from '@angular/forms';
+import { FormControl, Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { ClienteService } from 'src/app/services/cliente.service';
+import { Cliente } from 'src/app/clases/cliente';
+import { Router } from "@angular/router";
+import { Municipio } from 'src/app/clases/municipio';
+import { CitasService } from 'src/app/services/citas.service';
+import { Cita } from 'src/app/clases/cita';
+import Swal from "sweetalert2";
+import { DatePipe } from '@angular/common';
+
+
+
 
 
 @Component({
@@ -10,34 +20,145 @@ import { ClienteService } from 'src/app/services/cliente.service';
 })
 export class CitaComponent implements OnInit {
 
-  formulario: FormGroup;
+  cliente: Cliente;
+  cita: Cita;
+  formConsultaIdCliente: FormGroup;
+  formCliente: FormGroup;
+  formCita: FormGroup;
+  errores : string[];
 
-  constructor(private _fb: FormBuilder, private _clienteService: ClienteService) { }
+  municipio: Municipio;
+  municipios: Municipio[];
+
+  flagClienteExiste: boolean = false;
+
+
+
+  constructor(private _fb: FormBuilder, private _clienteService: ClienteService,
+              private _router: Router, private _citasService: CitasService,
+              private _datePipe: DatePipe) { }
 
   ngOnInit() {
-    this.formulario = this._fb.group({
-      idCliente: ['', [Validators.required, Validators.minLength(3),Validators.pattern('^[0-9]+$')]],
-      
+    this.formConsultaIdCliente = this._fb.group({
+      idCliente: ['', [Validators.required, Validators.minLength(3), Validators.pattern('^[0-9]+$')]],
+
     })
+
+    this.formCliente = this._fb.group({
+      idCliente: ['', [Validators.required, Validators.minLength(3), Validators.pattern('^[0-9]+$')]],
+      nombres: ['', [Validators.required, Validators.minLength(3)]],
+      apellidos: ['', [Validators.required, Validators.minLength(3)]],
+      direccion: ['', [Validators.required, Validators.minLength(10)]],
+      municipio: ['', [Validators.required, Validators.minLength(3)]],
+      departamento: ['', [Validators.required, Validators.minLength(3)]],
+      telefono: ['', [Validators.required, Validators.minLength(6), Validators.pattern('^[0-9]+$')]],
+      email: ['', Validators.pattern(('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$'))],
+      sexo: ['', [Validators.required, Validators.minLength(1)]],
+      fechaNacimiento: ['', [Validators.required, Validators.minLength(6)]],
+      caracteristicas: [],
+      fechaCreacion: [],
+      citas: [],
+
+    })
+
     
+    this.formCita = this._fb.group({
+      //idCita: ['', [Validators.required, Validators.minLength(3),Validators.pattern('^[0-9]+$')]],
+      fechaAsignacion: ['', [Validators.required, Validators.minLength(6)]],
+      estadoCita: ['false'],
+    })
 
   }
 
   public hasError = (controlName: string, errorName: string) => {
-    return this.formulario.controls[controlName].hasError(errorName);
+    return this.formConsultaIdCliente.controls[controlName].hasError(errorName);
   }
 
-  public getCliente(idCliente: string){
-    console.log("getCliente");
-    idCliente = this.formulario.controls.idCliente.value;
+  public hasErrorFormCita = (controlName: string, errorName: string) => {
+    return this.formCita.controls[controlName].hasError(errorName);
+  }
+
+
+  public getCitaContent(idCliente: string) {
+    this.getCliente(idCliente);
+    this.getMunicipios();
+  }
+
+  public getCliente(idCliente: string) {
+    console.log("Cita getCliente");
+    idCliente = this.formConsultaIdCliente.controls.idCliente.value;
+
+    this._clienteService.getCliente(idCliente).subscribe(
+      response => {
+        console.log(response);
+        this.cliente = response;
+        this.formCliente.setValue(this.cliente);
+        this.formCliente.controls.idCliente.disable();
+        this.formCliente.controls.nombres.disable();
+        this.formCliente.controls.apellidos.disable();
+        this.formCliente.controls.direccion.disable();
+        this.formCliente.controls.municipio.disable();
+        this.formCliente.controls.departamento.disable();
+        this.formCliente.controls.telefono.disable();
+        this.formCliente.controls.email.disable();
+        this.formCliente.controls.sexo.disable();
+        this.formCliente.controls.fechaNacimiento.disable();
+        this.formCliente.controls.caracteristicas.disable();
+        this.flagClienteExiste = true;
+
+
+      },
+      error => {
+        console.log("El negro no existe");
+      }
+    );
+  }
+
+  getMunicipios() {
+    console.log("cita_ getMunicipios");
+    this._clienteService.getMunicipios().subscribe(
+      response => {
+        console.log(response);
+        this.municipios = response;
+
+
+      }
+    )
+  }
+
+  compararMunicipios(o1: Municipio, o2: Municipio) {
+    return o1 === null || o2 === null ? false : o1.id === o2.id;
+  }
+
+  addCita() {
+    console.log("addCita-cliente");
+    console.log(this.cliente);
+    console.log(this.formCita.value);
+    this.cita = this.formCita.value;
     
-    this._clienteService.getCliente(idCliente).subscribe(response=>{
-      console.log(response);
-    })
+    this.cita.fechaAsignacion = this._datePipe.transform(new Date(),'yyyy-mm-dd');
+    this.cita.id = null;
+    this.cita.idCliente = this.cliente.idCliente;
+    console.log("this.citaaaa")
+    console.log(this.cita);
 
     
+    //this.cita.estadoCita = false;
+
+    this._citasService.addCita(this.cita).subscribe(
+      response => {
+        console.log(response);
+        Swal.fire('Asignar Cita', `Cita asignada exitisamente al cliente con CC ${this.cliente.idCliente} `, 'success');
+      },
+      error => {
+        console.error(`Codigo del error generado desde el backend: ${error.status}`);
+        console.error(error.error.errors);
+        Swal.fire('Asignar Cita', `Error en datos ${this.errores}`, 'error');
+      }
+    );
 
   }
+
 
 
 }

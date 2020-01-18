@@ -44,14 +44,23 @@ public class CitaRestController {
     @GetMapping("/citas")
     @ResponseStatus(HttpStatus.OK)
     public List<Cita> index(){
+        System.out.println("********************gettMapping**********************");
+        
+        
         return citaService.findAll();
     
     }
     
     //Add Cita
     @PostMapping("/citas")
-    @ResponseStatus(HttpStatus.CREATED)
+    //@ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<?> create(@Valid @RequestBody Cita cita, BindingResult result){
+        
+        System.out.println("********************PostMapping**********************");
+        System.out.println("Cita: "+cita);
+        System.out.println(cita);
+        
+        
         
         Cita citaNueva = null;
         Map<String, Object> response = new HashMap<>();
@@ -64,7 +73,7 @@ public class CitaRestController {
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
         try{
-            cita.setFechaCreacion(new Date());
+            //cita.setFechaCreacion(new Date());
             citaNueva = citaService.save(cita);
         }
         catch(DataAccessException e){

@@ -44,6 +44,7 @@ export class ReadClienteComponent implements OnInit {
       fechaNacimiento: ['', [Validators.required, Validators.minLength(6)]],
       caracteristicas: [],
       fechaCreacion: [],
+      citas:[]
     })
     
 
@@ -64,12 +65,10 @@ export class ReadClienteComponent implements OnInit {
         this.formulario.controls.sexo.disable();
         this.formulario.controls.fechaNacimiento.disable();
         this.formulario.controls.caracteristicas.disable();
-
-
-
       },
-      error => { }
-
+      error => { 
+        console.log("Negron no existe")
+      }
     )
 
   }

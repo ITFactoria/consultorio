@@ -35,33 +35,34 @@ public class Cita implements Serializable {
     private long id;
     
     @Temporal(TemporalType.DATE)
-    private Date fecha;
+    private Date fechaAsignacion;
     
-    //@Temporal(TemporalType.TIME)
-    private Time hora;
+    /*
+    Estado de la cita
+    0: Asignada
+    1: Atendida
+    */
+    private boolean estadoCita;
     
-    private int valor;
-    
-    @Temporal(TemporalType.DATE)
-    private Date fechaCreacion;
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="cliente_id")
     @JsonIgnoreProperties({"facturas","hibernateLazyInitializer","handler"})
     private Cliente cliente;
+    //private String idCliente;
+
 
     public Cita() {
     }
-    
-    
 
-    public Cita(long id, Date fecha, Time hora, int valor) {
+    public Cita(long id, Date fechaAsignacion, boolean estadoCita, Cliente cliente) {
         this.id = id;
-        this.fecha = fecha;
-        this.hora = hora;
-        this.valor = valor;
+        this.fechaAsignacion = fechaAsignacion;
+        this.estadoCita = estadoCita;
+        this.cliente = cliente;
     }
-
+    
+    
     public long getId() {
         return id;
     }
@@ -70,30 +71,22 @@ public class Cita implements Serializable {
         this.id = id;
     }
 
-    public Date getFecha() {
-        return fecha;
+    public Date getFechaAsignacion() {
+        return fechaAsignacion;
     }
 
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
+    public void setFechaAsignacion(Date fechaAsignacion) {
+        this.fechaAsignacion = fechaAsignacion;
     }
 
-    public Time getHora() {
-        return hora;
+    public boolean isEstadoCita() {
+        return estadoCita;
     }
 
-    public void setHora(Time hora) {
-        this.hora = hora;
+    public void setEstadoCita(boolean estadoCita) {
+        this.estadoCita = estadoCita;
     }
-
-    public int getValor() {
-        return valor;
-    }
-
-    public void setValor(int valor) {
-        this.valor = valor;
-    }
-
+    
     public Cliente getCliente() {
         return cliente;
     }
@@ -102,19 +95,5 @@ public class Cita implements Serializable {
         this.cliente = cliente;
     }
 
-    public Date getFechaCreacion() {
-        return fechaCreacion;
-    }
-
-    public void setFechaCreacion(Date fechaCreacion) {
-        this.fechaCreacion = fechaCreacion;
-    }
-    
-    @PrePersist
-    public void prePersist(){
-        this.fechaCreacion = new Date();
-    
-    }
-    
     
 }

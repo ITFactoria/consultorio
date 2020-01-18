@@ -67,7 +67,7 @@ public class ClienteRestController {
         }
 
         if (cliente == null) {
-            response.put("mensaje", "El cliente con CC ".concat(idCliente).concat(" no existe."));
+            response.put("mensaje", "El paciente con CC ".concat(idCliente).concat(" no existe."));
             return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
 
         }
@@ -103,7 +103,7 @@ public class ClienteRestController {
 
         }
 
-        response.put("mensaje", "El cliente fue creado exitosamente");
+        response.put("mensaje", "El paciente fue creado exitosamente");
         response.put("cliente", clienteNuevo);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
 
@@ -119,13 +119,13 @@ public class ClienteRestController {
             clienteService.delete(idCliente);
 
         } catch (DataAccessException dae) {
-            response.put("mensaje", "Error al eliminar cliente.");
+            response.put("mensaje", "Error al eliminar paciente.");
             response.put("Error", dae.getMessage().concat(": ").concat(dae.getMostSpecificCause().getMessage()));
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 
         }
 
-        response.put("mensaje", "El cliente fue eliminado exitosamente");
+        response.put("mensaje", "El paciente fue eliminado exitosamente");
 
         return new ResponseEntity<>(response, HttpStatus.OK);
 
@@ -155,7 +155,7 @@ public class ClienteRestController {
         Cliente clienteActual = clienteService.findById(idCliente);
 
         if (clienteActual == null) {
-            response.put("mensaje", "Error. Cliente con CC".concat(idCliente).concat("no encontrado"));
+            response.put("mensaje", "Error. Paciente con CC".concat(idCliente).concat("no encontrado"));
             return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
 
         } else {
@@ -173,12 +173,12 @@ public class ClienteRestController {
                 clienteActualizado = clienteService.save(clienteActual);
 
             } catch (DataAccessException dae) {
-                response.put("mensaje", "Error al actualizar cliente");
+                response.put("mensaje", "Error al actualizar paciente");
                 response.put("error", dae.getMessage().concat(": ").concat(dae.getMostSpecificCause().getMessage()));
                 return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
             }
 
-            response.put("mensaje", "El cliente fue actualizado exitosamente");
+            response.put("mensaje", "El paciente fue actualizado exitosamente");
             response.put("cliente", clienteActualizado);
             return new ResponseEntity<>(response, HttpStatus.CREATED);
 

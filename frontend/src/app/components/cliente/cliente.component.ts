@@ -195,7 +195,7 @@ export class ClienteComponent implements OnInit {
             this.errores = error.error.errors as string[];
             console.error(`Codigo del error generado desde el backend: ${error.status}`);
             console.error(error.error.errors);
-            swal.fire('Adicionar cliente', `Error en datos ${this.errores}`, 'error');
+            swal.fire('Crear cliente', `Error en datos ${this.errores}`, 'error');
             
 
           }

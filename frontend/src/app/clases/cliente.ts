@@ -18,5 +18,4 @@ export class Cliente implements Icliente {
     fechaCreacion: string;
     citas : Array<Cita> = [];
 
-
 }
