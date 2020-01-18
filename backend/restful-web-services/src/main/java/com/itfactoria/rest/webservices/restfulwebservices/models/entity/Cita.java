@@ -7,8 +7,8 @@ package com.itfactoria.rest.webservices.restfulwebservices.models.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
-import java.sql.Time;
 import java.util.Date;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -16,7 +16,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -32,8 +31,9 @@ public class Cita implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     
+    @Column(name="fecha_asignacion")
     @Temporal(TemporalType.DATE)
     private Date fechaAsignacion;
     
@@ -42,12 +42,13 @@ public class Cita implements Serializable {
     0: Asignada
     1: Atendida
     */
+    @Column(name="estado_cita")
     private boolean estadoCita;
     
     
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="cliente_id")
-    @JsonIgnoreProperties({"facturas","hibernateLazyInitializer","handler"})
+    //@JoinColumn(name="cliente_id")
+    @JsonIgnoreProperties({"citas","hibernateLazyInitializer","handler"})
     private Cliente cliente;
     //private String idCliente;
 
@@ -63,11 +64,11 @@ public class Cita implements Serializable {
     }
     
     
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -28,9 +28,6 @@ export class ClienteService {
         return response;
       }),
       catchError(e =>{
-        //this._router.navigate(['/clientes']);
-        //this._router.navigate(['cliente']);
-        
         console.error(e.error.mensaje);
         Swal.fire('Error al consultar paciente',e.error.mensaje,'error');
         //return e;

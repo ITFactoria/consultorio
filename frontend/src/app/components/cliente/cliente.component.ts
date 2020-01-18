@@ -68,15 +68,12 @@ export class ClienteComponent implements OnInit {
       idCliente: ['', [Validators.required, Validators.minLength(3),Validators.pattern('^[0-9]+$')]],
       nombres: ['', [Validators.required, Validators.minLength(3)]],
       apellidos: ['', [Validators.required, Validators.minLength(3)]],
-      direccion: ['', [Validators.required, Validators.minLength(10)]],
+      direccion: [''],
       municipio: ['', [Validators.required, Validators.minLength(3)]],
-      /*municipio : this._fb.group({
-        id: [],
-        nombre : []
-      }),*/
-      departamento: ['', [Validators.required, Validators.minLength(3)]],
+      departamento: [''],
       telefono: ['', [Validators.required, Validators.minLength(6),Validators.pattern('^[0-9]+$')]],
-      email: ['',Validators.pattern(('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$'))],
+      email: [''],
+      //email: ['',Validators.pattern(('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$'))],
       sexo: ['', [Validators.required, Validators.minLength(1)]],
       fechaNacimiento: ['', [Validators.required, Validators.minLength(6)]],
       caracteristicas: [],
@@ -152,6 +149,11 @@ export class ClienteComponent implements OnInit {
     )
   }
 
+  compararMunicipios(o1: Municipio, o2: Municipio) {
+    return o1 === null || o2 === null ? false : o1.id === o2.id;
+  }
+
+
   
   updateCliente(idCliente: string) {
     console.log(`UpdateCliente No: ${this.formulario.controls.idCliente.value}`);
@@ -184,8 +186,10 @@ export class ClienteComponent implements OnInit {
           response=>{
             this.flagOperacionExitosa==true;
             //this.userMessage = 'Cliente adicionado exitosamente';
-            this._router.navigate(['/clientes']);
+            //this._router.navigate(['/clientes']);
             swal.fire('Crear cliente',`Cliente con CC ${this.cliente.idCliente} creado exitosamente`,'success');
+            this._router.navigate(['/cita',this.cliente.idCliente]);
+            
 
             
           },
@@ -238,9 +242,6 @@ export class ClienteComponent implements OnInit {
 
   }
 
-  compararMunicipio(o1: Municipio, o2: Municipio){
-    return o1===null || o2===null? false: o1.id===o2.id;
-
-  }
+  
 
 }

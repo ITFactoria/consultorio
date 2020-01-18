@@ -48,8 +48,6 @@ public class Cliente implements Serializable{
     @Size(min=4, max=100)
     private String apellidos;
     
-    @NotEmpty
-    @Size(min=4, max=100)
     private String direccion;
     
     @NotNull(message="El Municipo es requerido")
@@ -60,8 +58,6 @@ public class Cliente implements Serializable{
     private Municipio municipio;
     //private String municipio;
     
-    @NotEmpty
-    @Size(min=4, max=100)
     private String departamento;
     
     @NotEmpty
@@ -104,12 +100,12 @@ public class Cliente implements Serializable{
     
     
     public Cliente() {
-        this.citas = new ArrayList();
+        this.citas = new ArrayList<>();
     }
     
     
 
-    public Cliente(String idCliente, String nombres, String apellidos, String direccion, Municipio municipio, String departamento, String telefono, String email, String sexo, Date fechaNacimiento, String caracteristicas, Date fechaCreacion) {
+    /*public Cliente(String idCliente, String nombres, String apellidos, String direccion, Municipio municipio, String departamento, String telefono, String email, String sexo, Date fechaNacimiento, String caracteristicas, Date fechaCreacion) {
         this.idCliente = idCliente;
         this.nombres = nombres;
         this.apellidos = apellidos;
@@ -122,7 +118,7 @@ public class Cliente implements Serializable{
         this.fechaNacimiento = fechaNacimiento;
         this.caracteristicas = caracteristicas;
         this.fechaCreacion = fechaCreacion;
-    }
+    }*/
 
     public void setIdCliente(String idCliente) {
         this.idCliente = idCliente;

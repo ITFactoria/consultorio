@@ -53,7 +53,7 @@ public class CitaRestController {
     
     //Add Cita
     @PostMapping("/citas")
-    //@ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<?> create(@Valid @RequestBody Cita cita, BindingResult result){
         
         System.out.println("********************PostMapping**********************");

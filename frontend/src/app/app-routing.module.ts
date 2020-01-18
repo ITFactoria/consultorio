@@ -15,6 +15,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent },
   { path: 'cita', component: CitaComponent },
+  { path: 'cita/:idCliente', component: CitaComponent },
   { path: 'citas', component: CitasComponent },
   { path: 'home/:username', component: HomeComponent },
   { path: 'clientes', component: ClientesComponent },

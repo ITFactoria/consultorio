@@ -4,6 +4,6 @@ export class Cita {
     id: number;
     fechaAsignacion: string;
     estadoCita: boolean;
-    idCliente: string;
+    cliente: Cliente;
 
 }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { ClienteService } from 'src/app/services/cliente.service';
 import { Cliente } from 'src/app/clases/cliente';
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 import { Municipio } from 'src/app/clases/municipio';
 import { CitasService } from 'src/app/services/citas.service';
 import { Cita } from 'src/app/clases/cita';
@@ -26,6 +26,7 @@ export class CitaComponent implements OnInit {
   formCliente: FormGroup;
   formCita: FormGroup;
   errores : string[];
+  idClienteNuevo : string;
 
   municipio: Municipio;
   municipios: Municipio[];
@@ -36,7 +37,7 @@ export class CitaComponent implements OnInit {
 
   constructor(private _fb: FormBuilder, private _clienteService: ClienteService,
               private _router: Router, private _citasService: CitasService,
-              private _datePipe: DatePipe) { }
+              private _datePipe: DatePipe, private _activatedRoute : ActivatedRoute) { }
 
   ngOnInit() {
     this.formConsultaIdCliente = this._fb.group({
@@ -67,6 +68,20 @@ export class CitaComponent implements OnInit {
       fechaAsignacion: ['', [Validators.required, Validators.minLength(6)]],
       estadoCita: ['false'],
     })
+
+    this.idClienteNuevo = this._activatedRoute.snapshot.params['idCliente'];
+    
+    console.log("Indicador Citaaaa");
+    console.log(this.idClienteNuevo);
+    
+    if(this.idClienteNuevo!=null){
+      this.flagClienteExiste = true;
+      this.formConsultaIdCliente.controls.idCliente.setValue(this.idClienteNuevo) ;
+      this.formCliente.controls.idCliente.setValue(this.idClienteNuevo) ;
+      
+
+      this.getCitaContent(this.idClienteNuevo);
+    }
 
   }
 
@@ -110,6 +125,7 @@ export class CitaComponent implements OnInit {
       },
       error => {
         console.log("El negro no existe");
+        this._router.navigate(['cliente']);
       }
     );
   }
@@ -131,24 +147,14 @@ export class CitaComponent implements OnInit {
   }
 
   addCita() {
-    console.log("addCita-cliente");
-    console.log(this.cliente);
-    console.log(this.formCita.value);
     this.cita = this.formCita.value;
-    
-    this.cita.fechaAsignacion = this._datePipe.transform(new Date(),'yyyy-mm-dd');
-    this.cita.id = null;
-    this.cita.idCliente = this.cliente.idCliente;
-    console.log("this.citaaaa")
-    console.log(this.cita);
-
-    
-    //this.cita.estadoCita = false;
-
+    this.cita.cliente = this.cliente;
+    this._datePipe.transform(this.cita.fechaAsignacion,'yyyy-mm-dd');
     this._citasService.addCita(this.cita).subscribe(
       response => {
         console.log(response);
         Swal.fire('Asignar Cita', `Cita asignada exitisamente al cliente con CC ${this.cliente.idCliente} `, 'success');
+        this._router.navigate(['citas']);
       },
       error => {
         console.error(`Codigo del error generado desde el backend: ${error.status}`);

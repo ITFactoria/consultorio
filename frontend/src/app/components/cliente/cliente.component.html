@@ -2,12 +2,91 @@
   <mat-card class="card">
     <mat-card-header>
       <mat-card-title class="card-title text-center" *ngIf="flagAccionCliente === 1">Crear Paciente</mat-card-title>
-      <mat-card-title class="card-title text-center" *ngIf="flagAccionCliente === 2">Actualizar Paciente</mat-card-title>
+      <mat-card-title class="card-title text-center" *ngIf="flagAccionCliente === 2">Actualizar Paciente
+      </mat-card-title>
 
     </mat-card-header>
     <mat-card-content>
       <form [formGroup]='formulario' (ngSubmit)='submitForm(formulario)'>
-        <table>
+        <mat-grid-list cols="3" rowHeight="6:1">
+          <mat-grid-tile>
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Cédula" formControlName="idCliente">
+              <mat-error *ngIf="hasError('idCliente','required')">Campo requerido</mat-error>
+              <mat-error *ngIf="hasError('idCliente','minlength')">Minimo 3 numeros</mat-error>
+              <mat-error *ngIf="hasError('idCliente','pattern')">Campo numerico</mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Nombres" formControlName="nombres">
+              <mat-error *ngIf="hasError('nombres','required')">Campo requerido</mat-error>
+              <mat-error *ngIf="hasError('nombres','minlength')">Minimo 3 caracteres</mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Apellidos" formControlName="apellidos">
+              <mat-error *ngIf="hasError('apellidos','required')">Campo requerido</mat-error>
+              <mat-error *ngIf="hasError('apellidos','minlength')">Minimo 3 caracteres</mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+        </mat-grid-list>
+        <mat-grid-list cols="4" rowHeight="3:1">
+          <mat-grid-tile>
+            <mat-form-field class="example-full-width">
+              <mat-label>Municipio</mat-label>
+              <mat-select formControlName="municipio" [compareWith]="compararMunicipios">
+                <mat-option *ngFor="let municipio of municipios" [value]="municipio">{{municipio.nombre}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="hasError('municipio','required')">Campo requerido</mat-error>
+              <mat-error *ngIf="hasError('municipio','minlength')">Minimo 3 caracteres</mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Telefono" formControlName="telefono">
+              <mat-error *ngIf="hasError('telefono','required')">Campo requerido</mat-error>
+              <mat-error *ngIf="hasError('telefono','minlength')">Minimo 6 numeros</mat-error>
+              <mat-error *ngIf="hasError('telefono','pattern')">Campo numerico</mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Sexo" formControlName="sexo">
+              <!-- <label>Sexo</label><br> -->
+              <mat-radio-group formControlName="sexo">
+                <mat-radio-button value="M">Hombre</mat-radio-button>
+                <mat-radio-button value="F">Mujer</mat-radio-button>
+                <mat-error *ngIf="hasError('sexo','required')">Campo requerido</mat-error>
+                <mat-error *ngIf="hasError('sexo','minlength')">Minimo 1 caracteres</mat-error>
+              </mat-radio-group>
+
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field class="example-full-width">
+              <input matInput [matDatepicker]="picker" placeholder="Fecha de Nacimiento"
+                formControlName="fechaNacimiento">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+              <mat-error *ngIf="hasError('email','required')">Campo requerido</mat-error>
+              <mat-error *ngIf="hasError('email','minlength')">Minimo 6 caracteres</mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+        </mat-grid-list>
+        <mat-grid-list cols="1" rowHeight="15:1">
+          <mat-grid-tile>
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Sintomatologia" formControlName="caracteristicas">
+            </mat-form-field>
+          </mat-grid-tile>
+        </mat-grid-list>
+
+
+
+        <!-- <table>
           <tr>
             <td>
               <mat-form-field class="example-full-width">
@@ -15,7 +94,7 @@
                 <mat-error *ngIf="hasError('idCliente','required')">Campo requerido</mat-error>
                 <mat-error *ngIf="hasError('idCliente','minlength')">Minimo 3 numeros</mat-error>
                 <mat-error *ngIf="hasError('idCliente','pattern')">Campo numerico</mat-error>
-                
+
               </mat-form-field>
 
             </td>
@@ -42,24 +121,24 @@
                 <mat-error *ngIf="hasError('direccion','minlength')">Minimo 10 caracteres</mat-error>
               </mat-form-field>
             </td>
-            <!-- <td>
+            <td>
               <mat-form-field class="example-full-width">
                 <input matInput placeholder="Municipio" formControlName="municipio">
                 <mat-error *ngIf="hasError('municipio','required')">Campo requerido</mat-error>
                 <mat-error *ngIf="hasError('municipio','minlength')">Minimo 3 caracteres</mat-error>
               </mat-form-field>
-            </td> -->
+            </td>
             <td>
               <mat-form-field class="example-full-width">
                 <mat-label>Municipio</mat-label>
-                <mat-select formControlName="municipio" [compareWith] ="compararMunicipio"> 
+                <mat-select formControlName="municipio" [compareWith]="compararMunicipios">
                   <mat-option *ngFor="let municipio of municipios" [value]="municipio">{{municipio.nombre}}</mat-option>
                 </mat-select>
                 <mat-error *ngIf="hasError('municipio','required')">Campo requerido</mat-error>
                 <mat-error *ngIf="hasError('municipio','minlength')">Minimo 3 caracteres</mat-error>
               </mat-form-field>
             </td>
-            
+
             <td>
               <mat-form-field class="example-full-width">
                 <input matInput placeholder="Departamento" formControlName="departamento">
@@ -73,7 +152,7 @@
                 <mat-error *ngIf="hasError('telefono','required')">Campo requerido</mat-error>
                 <mat-error *ngIf="hasError('telefono','minlength')">Minimo 6 numeros</mat-error>
                 <mat-error *ngIf="hasError('telefono','pattern')">Campo numerico</mat-error>
-                
+
 
               </mat-form-field>
             </td>
@@ -83,7 +162,7 @@
               <mat-form-field class="example-full-width">
                 <input matInput placeholder="Email" formControlName="email">
                 <mat-error *ngIf="hasError('email','pattern')">Email invalido</mat-error>
-             
+
               </mat-form-field>
             </td>
             <td>
@@ -95,9 +174,7 @@
                 <mat-error *ngIf="hasError('email','required')">Campo requerido</mat-error>
                 <mat-error *ngIf="hasError('email','minlength')">Minimo 6 caracteres</mat-error>
               </mat-form-field>
-              <!-- <mat-form-field class="example-full-width">
-                <input matInput placeholder="Fecha Nacimiento" formControlName="fechaNacimiento">
-              </mat-form-field> -->
+              
             </td>
 
             <td>
@@ -108,9 +185,6 @@
                 <mat-error *ngIf="hasError('sexo','required')">Campo requerido</mat-error>
                 <mat-error *ngIf="hasError('sexo','minlength')">Minimo 1 caracteres</mat-error>
               </mat-radio-group>
-              <!-- <mat-form-field class="example-full-width">
-                <input matInput placeholder="Sexo" formControlName="sexo">
-              </mat-form-field> -->
             </td>
           </tr>
           <tr>
@@ -123,7 +197,8 @@
               </mat-form-field>
             </td>
           </tr>
-        </table>
+        </table> -->
+
         <mat-grid-list cols="2" rowHeight="5:1">
           <mat-grid-tile>
             <!-- <button mat-raised-button color="primary" [disabled]="!formulario.valid || flagAccionCliente == 1">Guardar</button> -->
@@ -134,7 +209,7 @@
           </mat-grid-tile>
         </mat-grid-list>
 
-        
+
       </form>
     </mat-card-content>
     <mat-card-actions>
@@ -151,8 +226,8 @@
   <div class="card border-info mb-3">
     <!-- <div class="card-header">Consulta de cliente</div> -->
     <!-- <div class="card-body text-info"> -->
-    
-      <!-- <div class="alert alert-success" role="alert" *ngIf="flagAccionCliente==1 && flagOperacionExitosa==true">
+
+    <!-- <div class="alert alert-success" role="alert" *ngIf="flagAccionCliente==1 && flagOperacionExitosa==true">
         {{userMessage}}
       </div>
       <div class="alert alert-danger" role="alert" *ngIf="flagAccionCliente==1 && flagOperacionExitosa==false">
@@ -167,8 +242,8 @@
 
 
 
-      
-      <!-- <div>
+
+    <!-- <div>
               <form [formGroup]='formulario' (ngSubmit)='submitForm(formulario)'>
 
         <div class="form-row">

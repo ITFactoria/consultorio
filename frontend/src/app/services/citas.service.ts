@@ -12,7 +12,7 @@ import  Swal  from "sweetalert2";
 })
 export class CitasService {
 
-  private urlBackend = 'http://localhost:8080/api/';
+  private urlBackend = 'http://localhost:8080/api';
   private citas : Array<Cita>;
   //private cita: Cita;
   private httpHeaders = new HttpHeaders({'Content-Type':'application/json'});
@@ -21,7 +21,7 @@ export class CitasService {
   constructor(private _httpClient: HttpClient) { }
 
   getCitas(): Observable<Cita[]>{
-    return this._httpClient.get<Cita[]>(`${this.urlBackend}citas`).pipe(
+    return this._httpClient.get<Cita[]>(`${this.urlBackend}/citas`).pipe(
       map (response => response as Cita[]));
 
     
@@ -30,7 +30,7 @@ export class CitasService {
   addCita(cita: Cita) : Observable<Cita>{
     console.log("addCita Service");
     console.log(cita);
-    return this._httpClient.post<Cita>(`${this.urlBackend}citas/`,cita,{headers:this.httpHeaders}).
+    return this._httpClient.post<Cita>(`${this.urlBackend}/citas`,cita,{headers:this.httpHeaders}).
     pipe(
       catchError(e=>{
         if(e.status == 400){
