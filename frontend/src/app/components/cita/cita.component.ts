@@ -27,6 +27,7 @@ export class CitaComponent implements OnInit {
   formCita: FormGroup;
   errores : string[];
   idClienteNuevo : string;
+  idCliente : string;
 
   municipio: Municipio;
   municipios: Municipio[];
@@ -71,15 +72,14 @@ export class CitaComponent implements OnInit {
 
     this.idClienteNuevo = this._activatedRoute.snapshot.params['idCliente'];
     
-    console.log("Indicador Citaaaa");
+    console.log("evalua si es cliente nuevo");
     console.log(this.idClienteNuevo);
     
     if(this.idClienteNuevo!=null){
       this.flagClienteExiste = true;
       this.formConsultaIdCliente.controls.idCliente.setValue(this.idClienteNuevo) ;
-      this.formCliente.controls.idCliente.setValue(this.idClienteNuevo) ;
-      
 
+      this.formCliente.controls.idCliente.setValue(this.idClienteNuevo) ;
       this.getCitaContent(this.idClienteNuevo);
     }
 
@@ -102,6 +102,7 @@ export class CitaComponent implements OnInit {
   public getCliente(idCliente: string) {
     console.log("Cita getCliente");
     idCliente = this.formConsultaIdCliente.controls.idCliente.value;
+    this.idCliente = idCliente;
 
     this._clienteService.getCliente(idCliente).subscribe(
       response => {
@@ -125,7 +126,13 @@ export class CitaComponent implements OnInit {
       },
       error => {
         console.log("El negro no existe");
-        this._router.navigate(['cliente']);
+        //this._router.navigate(['cliente',this.idCliente]);
+        //this._router.navigate(['cliente']);
+        
+        this._router.navigate(['cliente',{id1: "cita", id2: this.idCliente }]);
+        
+        
+        
       }
     );
   }

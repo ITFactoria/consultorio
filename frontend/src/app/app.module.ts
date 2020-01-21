@@ -26,6 +26,7 @@ import { ErrorComponent } from './components/error/error.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ReadClienteComponent } from './components/read-cliente/read-cliente.component';
 import { CitaComponent } from './components/cita/cita.component';
+import { EstadoCitaPipe } from './pipes/estado-cita.pipe';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { CitaComponent } from './components/cita/cita.component';
     ErrorComponent,
     FooterComponent,
     ReadClienteComponent,
-    CitaComponent
+    CitaComponent,
+    EstadoCitaPipe
   ],
   imports: [
     BrowserModule,

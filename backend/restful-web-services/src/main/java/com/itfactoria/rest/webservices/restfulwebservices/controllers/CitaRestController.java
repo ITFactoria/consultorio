@@ -56,11 +56,6 @@ public class CitaRestController {
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<?> create(@Valid @RequestBody Cita cita, BindingResult result){
         
-        System.out.println("********************PostMapping**********************");
-        System.out.println("Cita: "+cita);
-        System.out.println(cita);
-        
-        
         
         Cita citaNueva = null;
         Map<String, Object> response = new HashMap<>();

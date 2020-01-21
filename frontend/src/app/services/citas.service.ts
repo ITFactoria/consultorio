@@ -16,6 +16,8 @@ export class CitasService {
   private citas : Array<Cita>;
   //private cita: Cita;
   private httpHeaders = new HttpHeaders({'Content-Type':'application/json'});
+
+  
  
   
   constructor(private _httpClient: HttpClient) { }

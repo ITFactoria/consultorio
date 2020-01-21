@@ -17,14 +17,15 @@ export class ClienteComponent implements OnInit {
 
   idCliente: string;
   formulario: FormGroup;
+  target: string;
 
   cliente: Icliente;
   municipio: Municipio;
-  municipios : Municipio[];
+  municipios: Municipio[];
 
-  userMessage : string;
+  userMessage: string;
   flagOperacionExitosa = false;
-  errores : string[];
+  errores: string[];
 
   /*Accion deseada
   1 = adicionar cliente
@@ -36,14 +37,23 @@ export class ClienteComponent implements OnInit {
 
 
   constructor(
-    private _activatedRoute: ActivatedRoute, 
-    private _clienteService: ClienteService, 
-    private _router: Router, 
+    private _activatedRoute: ActivatedRoute,
+    private _clienteService: ClienteService,
+    private _router: Router,
     private _datePipe: DatePipe,
-    private _fb: FormBuilder) {}
+    private _fb: FormBuilder) { }
 
   ngOnInit() {
+
+    console.log("cliente.nginit")
     this.idCliente = this._activatedRoute.snapshot.params['idCliente'];
+
+    this.target = this._activatedRoute.snapshot.params['id1'];
+    this.idCliente = this._activatedRoute.snapshot.params['id2'];
+
+    console.log(this.target);
+    console.log(this.idCliente);
+    
     
     /*this.formulario = new FormGroup({
       'idCliente': new FormControl('', [Validators.required, Validators.minLength(3),Validators.pattern('^[0-9]+$')]),
@@ -65,13 +75,13 @@ export class ClienteComponent implements OnInit {
     })*/
 
     this.formulario = this._fb.group({
-      idCliente: ['', [Validators.required, Validators.minLength(3),Validators.pattern('^[0-9]+$')]],
+      idCliente: ['', [Validators.required, Validators.minLength(3), Validators.pattern('^[0-9]+$')]],
       nombres: ['', [Validators.required, Validators.minLength(3)]],
       apellidos: ['', [Validators.required, Validators.minLength(3)]],
       direccion: [''],
       municipio: ['', [Validators.required, Validators.minLength(3)]],
       departamento: [''],
-      telefono: ['', [Validators.required, Validators.minLength(6),Validators.pattern('^[0-9]+$')]],
+      telefono: ['', [Validators.required, Validators.minLength(6), Validators.pattern('^[0-9]+$')]],
       email: [''],
       //email: ['',Validators.pattern(('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$'))],
       sexo: ['', [Validators.required, Validators.minLength(1)]],
@@ -79,17 +89,13 @@ export class ClienteComponent implements OnInit {
       caracteristicas: [],
       fechaCreacion: [],
     })
-    
 
-
-
-
-    if (this.idCliente == null) {
+    if (this.idCliente == null || this.target=="cita") {
       //Adicionar Cliente
-      console.log('Adicionar Cliente');
       this.flagAccionCliente = 1;
       this.getMunicipios();
-      console.log(this.flagAccionCliente);
+      if(this.target=="cita")
+        {this.formulario.controls.idCliente.setValue(this.idCliente);}
     }
     else {
       //Actualizar Cliente
@@ -97,8 +103,8 @@ export class ClienteComponent implements OnInit {
       this.flagAccionCliente = 2;
       this.getCliente(this.idCliente);
       this.getMunicipios();
-      
-      
+
+
       /*this.formulario.controls.idCliente.disable();
       this.formulario.controls.nombres.disable();
       this.formulario.controls.apellidos.disable();
@@ -110,26 +116,26 @@ export class ClienteComponent implements OnInit {
       this.formulario.controls.sexo.disable();
       this.formulario.controls.fechaNacimiento.disable();
       this.formulario.controls.caracteristicas.disable();*/
-      
+
 
     }
   }
 
   public hasError = (controlName: string, errorName: string) => {
-     return this.formulario.controls[controlName].hasError(errorName);
-   }
+    return this.formulario.controls[controlName].hasError(errorName);
+  }
 
- 
+
   getCliente(idCliente: string) {
     this._clienteService.getCliente(idCliente).subscribe(
       response => {
         this.cliente = response;
         this.formulario.setValue(this.cliente);
         console.log("nunucipio");
-    
+
         console.log(this.cliente.municipio.nombre);
-    
-       
+
+
       },
       error => { }
 
@@ -137,13 +143,13 @@ export class ClienteComponent implements OnInit {
 
   }
 
-  getMunicipios(){
+  getMunicipios() {
     console.log("gerMunicipios");
     this._clienteService.getMunicipios().subscribe(
-      response =>{
+      response => {
         console.log(response);
         this.municipios = response;
-        
+
 
       }
     )
@@ -154,7 +160,7 @@ export class ClienteComponent implements OnInit {
   }
 
 
-  
+
   updateCliente(idCliente: string) {
     console.log(`UpdateCliente No: ${this.formulario.controls.idCliente.value}`);
     this.flagAccionCliente = 3;
@@ -174,33 +180,30 @@ export class ClienteComponent implements OnInit {
     switch (this.flagAccionCliente) {
       case 1: {
         //Add Cliente
-        
-        
-        this.cliente = this.formulario.value;
-        this.cliente.fechaCreacion = this._datePipe.transform(new Date(),'yyyy-mm-dd');
+        console.log("Cliente.AddCliente")
 
-        
-        //this.cliente.fechaCreacion = new Date().toString();
-        
+
+        this.cliente = this.formulario.value;
+        this.cliente.fechaCreacion = this._datePipe.transform(new Date(), 'yyyy-mm-dd');
         this._clienteService.addCliente(this.cliente).subscribe(
-          response=>{
-            this.flagOperacionExitosa==true;
+          response => {
+            this.flagOperacionExitosa == true;
             //this.userMessage = 'Cliente adicionado exitosamente';
             //this._router.navigate(['/clientes']);
-            swal.fire('Crear cliente',`Cliente con CC ${this.cliente.idCliente} creado exitosamente`,'success');
-            this._router.navigate(['/cita',this.cliente.idCliente]);
-            
+            swal.fire('Crear cliente', `Cliente con CC ${this.cliente.idCliente} creado exitosamente`, 'success');
+            this._router.navigate(['/cita', this.cliente.idCliente]);
 
-            
+
+
           },
-          error=>{
-            this.flagOperacionExitosa==false;
+          error => {
+            this.flagOperacionExitosa == false;
             this.userMessage = 'Error adicionando cliente. Intente de nuevo';
             this.errores = error.error.errors as string[];
             console.error(`Codigo del error generado desde el backend: ${error.status}`);
             console.error(error.error.errors);
             swal.fire('Crear cliente', `Error en datos ${this.errores}`, 'error');
-            
+
 
           }
         );
@@ -210,31 +213,31 @@ export class ClienteComponent implements OnInit {
       }
       case 2: {
         //Update Cliente
-       
+
         this.cliente = this.formulario.value;
         this.cliente.idCliente = this.formulario.controls.idCliente.value;
-       
+
         this._clienteService.updateCliente(this.idCliente, this.cliente).subscribe(
-          response => { 
+          response => {
             //this.userMessage = 'Cliente actualizado exitosamente';
-            this.flagOperacionExitosa = true; 
+            this.flagOperacionExitosa = true;
             this._router.navigate(['/clientes']);
             swal.fire('Actualizar cliente', `Cliente con CC ${this.cliente.idCliente} actualizado exitosamente`);
-            
-         },
+
+          },
           error => {
             this.userMessage = 'Error actualizndo cliente. Intente de nuevo';
             this.flagOperacionExitosa = false;
             this.errores = error.error.errors as string[];
             console.error(`Codigo de error generado desde el backend: ${error.status}`);
             console.error(error.error.errors);
-            swal.fire('Actualizar cliente', `${this.errores}`,'error');
-            
+            swal.fire('Actualizar cliente', `${this.errores}`, 'error');
+
           }
 
         )
       }
-      break;
+        break;
 
 
     }
@@ -242,6 +245,6 @@ export class ClienteComponent implements OnInit {
 
   }
 
-  
+
 
 }
