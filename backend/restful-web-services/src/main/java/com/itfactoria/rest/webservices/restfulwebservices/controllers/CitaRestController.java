@@ -34,7 +34,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "http://localhost:5000")
+@CrossOrigin(origins = {"http://localhost:5000","*"})
 
 public class CitaRestController {
     
@@ -44,9 +44,6 @@ public class CitaRestController {
     @GetMapping("/citas")
     @ResponseStatus(HttpStatus.OK)
     public List<Cita> index(){
-        System.out.println("********************gettMapping**********************");
-        
-        
         return citaService.findAll();
     
     }
