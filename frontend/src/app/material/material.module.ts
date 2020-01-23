@@ -10,7 +10,10 @@ import {  MatGridListModule,
           MatNativeDateModule, 
           MatToolbarModule, 
           MatSelectBase,
-          MatSelectModule} from "@angular/material";
+          MatSelectModule,
+          MatPaginatorModule,
+          MatSortModule,
+        } from "@angular/material";
 
 @NgModule({
   declarations: [],
@@ -25,8 +28,10 @@ import {  MatGridListModule,
     MatDatepickerModule,
     MatNativeDateModule,
     MatToolbarModule,
-    MatSelectModule
-
+    MatSelectModule,
+    MatSortModule,
+    MatPaginatorModule
+    
   ],
   exports:[
     MatGridListModule,
@@ -38,7 +43,9 @@ import {  MatGridListModule,
     MatDatepickerModule,
     MatNativeDateModule,
     MatToolbarModule,
-    MatSelectModule
+    MatSelectModule,
+    MatSortModule,
+    MatPaginatorModule
 
   ]
 })

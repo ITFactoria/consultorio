@@ -34,6 +34,7 @@ export class ClienteComponent implements OnInit {
   */
 
   flagAccionCliente: number;
+  formularioSubmitted : boolean = false;
 
 
   constructor(
@@ -89,6 +90,7 @@ export class ClienteComponent implements OnInit {
       caracteristicas: [],
       fechaCreacion: [],
     })
+    
 
     if (this.idCliente == null || this.target=="cita") {
       //Adicionar Cliente
@@ -177,6 +179,7 @@ export class ClienteComponent implements OnInit {
   }
 
   submitForm() {
+    this.formularioSubmitted = true;
     switch (this.flagAccionCliente) {
       case 1: {
         //Add Cliente
