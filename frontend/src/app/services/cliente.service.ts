@@ -7,6 +7,7 @@ import  Swal  from "sweetalert2";
 import { Router } from "@angular/router";
 import { Cliente } from '../clases/cliente';
 import { Municipio } from '../clases/municipio';
+import { URL_BACKEND } from "../config/config";
 
 
 
@@ -15,7 +16,9 @@ import { Municipio } from '../clases/municipio';
 })
 export class ClienteService {
 
-  private urlBackend = 'http://localhost:8080/api/';
+  //private urlBackend = 'http://localhost:8080/api/';
+  private urlBackend = URL_BACKEND;
+
   private httpHeaders = new HttpHeaders({'Content-Type':'application/json'});
   
 

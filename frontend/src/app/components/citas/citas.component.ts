@@ -22,15 +22,14 @@ export class CitasComponent implements OnInit {
 
   citas: Array<Cita> = [];
   dataSource = new MatTableDataSource(this.citas);
-  //displayedColumns: string[] = ['id', 'fechaAsignacion', 'idCliente', 'nombres', 'apellidos', 'estado', 'eliminar'];
   displayedColumns: string[] = ['id', 'fechaAsignacion', 'idCliente', 'nombres', 'apellidos'];
   pipe: DatePipe;
   fechaAsignacionCompara : Date;
+  clienteId: string;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  //@ViewChild(MatSort, {}) sort: MatSort;
-
+  
 
   filterForm = new FormGroup({
     fromDate: new FormControl(),
@@ -38,7 +37,7 @@ export class CitasComponent implements OnInit {
   });
 
   get fromDate() { return this.filterForm.get('fromDate').value;}
-  get toDate() { return this.filterForm.get('toDate').value; }
+  get toDate() { return this.filterForm.get('toDate').value; }x
 
   constructor(private _citasService: CitasService, private _router: Router, private _datePipe: DatePipe) {
     //this.getCitas();
@@ -46,7 +45,7 @@ export class CitasComponent implements OnInit {
 
   ngOnInit() {
     //this.dataSource.paginator = this.paginator;
-    //this.dataSource.sort = this.sort;
+    this.dataSource.sort = this.sort;
     this.getCitas();
 
   }
@@ -58,9 +57,11 @@ export class CitasComponent implements OnInit {
     
         this.citas = response;
         this.dataSource = new MatTableDataSource<Cita>(this.citas);
+        
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
-        this.dataSource.filterPredicate = (data, filter: string) => {
+        
+        /*this.dataSource.filterPredicate = (data, filter: string) => {
           this.fechaAsignacionCompara = new Date(data.fechaAsignacion);
           data.fechaAsignacion = this.fechaAsignacionCompara;
           
@@ -72,10 +73,20 @@ export class CitasComponent implements OnInit {
           }
 
           return true;
+        }*/
+
+        this.dataSource.filterPredicate = (data, filter: string) => {
+          this.clienteId = data.cliente.idCliente;
+          this.fechaAsignacionCompara = new Date(data.fechaAsignacion);
+          data.fechaAsignacion = this.fechaAsignacionCompara;
+          if (this.fromDate && this.toDate) {
+            console.log("test");
+            return data.fechaAsignacion >= this.fromDate && data.fechaAsignacion <= this.toDate;
+            
+          }
+          return this.clienteId.indexOf(filter) != -1;
+         
         }
-
-
-
       },
       error => {
         console.log("Error al consultar citas");
@@ -100,6 +111,9 @@ export class CitasComponent implements OnInit {
 
   }
 
-  
+  applyFilterId(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
 
 }

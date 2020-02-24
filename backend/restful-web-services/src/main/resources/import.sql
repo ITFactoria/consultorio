@@ -28,5 +28,11 @@ insert into citas(id, fecha_asignacion, estado_cita, cliente_id_cliente) values 
 insert into citas(id, fecha_asignacion, estado_cita, cliente_id_cliente) values (4,'1979-03-30',0,'12312345');
 insert into citas(id, fecha_asignacion, estado_cita, cliente_id_cliente) values (5,'1979-03-30',0,'12312345');
 insert into citas(id, fecha_asignacion, estado_cita, cliente_id_cliente) values (6,'1979-03-30',0,'678976379');
+insert into citas(id, fecha_asignacion, estado_cita, cliente_id_cliente) values (7,'2020-01-13',0,'678976379');
+insert into citas(id, fecha_asignacion, estado_cita, cliente_id_cliente) values (8,'2020-02-13',0,'678976379');
+insert into citas(id, fecha_asignacion, estado_cita, cliente_id_cliente) values (9,'2020-03-13',0,'678976379');
+insert into citas(id, fecha_asignacion, estado_cita, cliente_id_cliente) values (10,'2020-01-13',0,'678976379');
+insert into citas(id, fecha_asignacion, estado_cita, cliente_id_cliente) values (11,'2020-02-13',0,'678976379');
+insert into citas(id, fecha_asignacion, estado_cita, cliente_id_cliente) values (12,'2020-03-13',0,'678976379');
 
 

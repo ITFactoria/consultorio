@@ -4,6 +4,7 @@ import { Cita } from '../clases/cita';
 import { map, catchError } from 'rxjs/operators';
 import { throwError, Observable } from 'rxjs';
 import  Swal  from "sweetalert2";
+import { URL_BACKEND } from "../config/config";
 
 
 
@@ -12,7 +13,9 @@ import  Swal  from "sweetalert2";
 })
 export class CitasService {
 
-  private urlBackend = 'http://localhost:8080/api';
+  //private urlBackend = 'http://localhost:8080/api';
+  private urlBackend = URL_BACKEND;
+  
   private citas : Array<Cita>;
   //private cita: Cita;
   private httpHeaders = new HttpHeaders({'Content-Type':'application/json'});
@@ -23,6 +26,7 @@ export class CitasService {
   constructor(private _httpClient: HttpClient) { }
 
   getCitas(): Observable<Cita[]>{
+    console.log(this.urlBackend);
     return this._httpClient.get<Cita[]>(`${this.urlBackend}/citas`).pipe(
       map (response => response as Cita[]));
 

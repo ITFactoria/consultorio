@@ -6,6 +6,8 @@ import { map, catchError } from 'rxjs/operators';
 import Swal from 'sweetalert2';
 import { throwError } from 'rxjs';
 import { Cliente } from '../clases/cliente.js';
+import { URL_BACKEND } from "../config/config";
+
 
 
 @Injectable({
@@ -14,7 +16,8 @@ import { Cliente } from '../clases/cliente.js';
 export class ClientesService {
 
   private clientes : Icliente[];
-  private urlBackend = 'http://localhost:8080/api/';
+  //private urlBackend = 'http://localhost:8080/api/';
+  private urlBackend = URL_BACKEND;
   
 
   constructor(private _httpClient : HttpClient) { 

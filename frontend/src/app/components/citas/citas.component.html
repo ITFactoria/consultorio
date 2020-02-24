@@ -3,7 +3,7 @@
     <mat-card-header>
       <mat-card-title>Gestión de Citas</mat-card-title>
       <mat-card-subtitle>
-        <mat-grid-list cols="1" rowHeight="3:1">
+        <mat-grid-list cols="1" rowHeight="2:1">
           <mat-grid-tile>
             <button mat-raised-button color="primary" type="submit" (click)="addCita()">Crear Cita Nueva</button>
           </mat-grid-tile>
@@ -12,38 +12,45 @@
     </mat-card-header>
     <mat-card-content>
 
-      <form class="date-block" [formGroup]="filterForm">
-        <div class="date-block__list">
-          <mat-form-field>
-            <input matInput 
-              [matDatepicker]="fromDate" 
-              placeholder="Fecha inicial" 
-              formControlName="fromDate">
-            <mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
-            <mat-datepicker #fromDate></mat-datepicker>
-          </mat-form-field>
-        </div>
-          <div class="date-block__list">
-          <mat-form-field>
-            <input matInput 
-              [matDatepicker]="toDate" 
-              placeholder="Fecha Final" 
-              formControlName="toDate">
-            <mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
-            <mat-datepicker #toDate></mat-datepicker>
-          </mat-form-field>
-        </div>
-         <button mat-button color="primary" class="primary" (click)="applyFilter()">Filtrar Fechas</button>
+      <form [formGroup]="filterForm">
+        <mat-grid-list cols="4" rowHeight="5:1">
+          <mat-grid-tile>
+            <mat-form-field>
+              <mat-label>Cedula</mat-label>
+              <input matInput (keyup)="applyFilterId($event)" placeholder="Cedula">
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <div class="date-block__list">
+              <mat-form-field>
+                <input matInput [matDatepicker]="fromDate" placeholder="Fecha inicial" formControlName="fromDate">
+                <mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
+                <mat-datepicker #fromDate></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <div class="date-block__list">
+              <mat-form-field>
+                <input matInput [matDatepicker]="toDate" placeholder="Fecha Final" formControlName="toDate">
+                <mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
+                <mat-datepicker #toDate></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <button mat-button color="primary" class="primary" (click)="applyFilter()">Filtrar Fechas</button>
+          </mat-grid-tile>
+        </mat-grid-list>
       </form>
       <br>
-      
 
 
 
-      
+
+
       <div class="mat-elevation-z8">
-        <table #filteredTable mat-table [dataSource]="dataSource" 
-                matSort matSortActive="fechaAsignacion" matSortDirection="desc" class="mat-elevation-z8">
+        <table #filteredTable mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8">
 
           <!-- Id Column -->
           <ng-container matColumnDef="id">
@@ -65,20 +72,20 @@
 
           <!-- Id Cliente Column -->
           <ng-container matColumnDef="idCliente">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Cédula </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>  Cédula </th>
             <td mat-cell *matCellDef="let cita"> {{cita.cliente.idCliente}} </td>
           </ng-container>
 
 
           <!-- Nombre Cliente Column -->
           <ng-container matColumnDef="nombres">
-            <th mat-header-cell *matHeaderCellDef >Nombres</th>
+            <th mat-header-cell *matHeaderCellDef>Nombres</th>
             <td mat-cell *matCellDef="let cita"> {{cita.cliente.nombres}} </td>
           </ng-container>
 
           <!-- Apellido Cliente Column -->
           <ng-container matColumnDef="apellidos">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header class="header" style="text-align:center"> Apellidos </th>
+            <th mat-header-cell *matHeaderCellDef> Apellidos </th>
             <td mat-cell *matCellDef="let cita"> {{cita.cliente.apellidos}} </td>
           </ng-container>
 
