@@ -9,7 +9,7 @@ import { Router } from "@angular/router";
 import Swal from 'sweetalert2';
 import { DatePipe } from '@angular/common';
 import { FormGroup, FormControl, Validators, FormBuilder } from "@angular/forms";
-
+import * as moment from 'moment';
 
 
 
@@ -36,8 +36,9 @@ export class CitasComponent implements OnInit {
     toDate: new FormControl(),
   });
 
+  
   get fromDate() { return this.filterForm.get('fromDate').value;}
-  get toDate() { return this.filterForm.get('toDate').value; }x
+  get toDate() { return this.filterForm.get('toDate').value; }
 
   constructor(private _citasService: CitasService, private _router: Router, private _datePipe: DatePipe) {
     //this.getCitas();
@@ -53,6 +54,9 @@ export class CitasComponent implements OnInit {
   getCitas() {
     this._citasService.getCitas().subscribe(
       response => {
+        console.log("citas originales: ")
+        console.log(response);
+        
         this.pipe = new DatePipe('en');
     
         this.citas = response;
@@ -61,26 +65,25 @@ export class CitasComponent implements OnInit {
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
         
-        /*this.dataSource.filterPredicate = (data, filter: string) => {
-          this.fechaAsignacionCompara = new Date(data.fechaAsignacion);
-          data.fechaAsignacion = this.fechaAsignacionCompara;
-          
-          if (this.fromDate && this.toDate) {
-            console.log("test");
-            return data.fechaAsignacion >= this.fromDate && data.fechaAsignacion <= this.toDate;
-            //return data.fechaAsignacion >= this.fromDate && data.fechaAsignacion <= this.toDate;
-            
-          }
-
-          return true;
-        }*/
-
+        
         this.dataSource.filterPredicate = (data, filter: string) => {
           this.clienteId = data.cliente.idCliente;
+          //this.fechaAsignacionCompara = new Date(data.fechaAsignacion);
+          
+          
           this.fechaAsignacionCompara = new Date(data.fechaAsignacion);
-          data.fechaAsignacion = this.fechaAsignacionCompara;
+          let fechaMoment : Date = moment(data.fechaAsignacion).toDate();
+          
+          
+          console.log(`datafechaasignacionori= ${data.fechaAsignacion}`)
+          console.log(`fechasignacioncompara= ${this.fechaAsignacionCompara}`);
+          console.log(`fechaMoment= ${fechaMoment}`);
+          
+
+          //data.fechaAsignacion = this.fechaAsignacionCompara;
+          data.fechaAsignacion = fechaMoment;
+          
           if (this.fromDate && this.toDate) {
-            console.log("test");
             return data.fechaAsignacion >= this.fromDate && data.fechaAsignacion <= this.toDate;
             
           }
@@ -116,4 +119,5 @@ export class CitasComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
+  
 }

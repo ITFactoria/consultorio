@@ -20,10 +20,11 @@ const routes: Routes = [
   { path: 'home/:username', component: HomeComponent },
   { path: 'clientes', component: ClientesComponent },
   { path: 'read-cliente/:idCliente', component: ReadClienteComponent },
-  { path: 'cliente/:idCliente', component: ClienteComponent },
-  { path: 'cliente/:id1/:id2', component: ClienteComponent },
-  
   { path: 'cliente', component: ClienteComponent },
+  
+  { path: 'cliente/:idCliente', component: ClienteComponent },
+  //{ path: 'cliente/:id1/:id2', component: ClienteComponent },
+  
   { path: '*', component: HomeComponent },
   { path: '**', component: HomeComponent },
   

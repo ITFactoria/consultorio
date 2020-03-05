@@ -3,20 +3,19 @@ import { FormControl, Validators, FormBuilder, FormGroup } from '@angular/forms'
 import { ClienteService } from 'src/app/services/cliente.service';
 import { Cliente } from 'src/app/clases/cliente';
 import { Router, ActivatedRoute } from "@angular/router";
-import { Municipio } from 'src/app/clases/municipio';
+//import { Municipio } from 'src/app/clases/municipio';
 import { CitasService } from 'src/app/services/citas.service';
 import { Cita } from 'src/app/clases/cita';
 import Swal from "sweetalert2";
 import { DatePipe } from '@angular/common';
-
-
-
-
+//import { MAT_MOMENT_DATE_FORMATS, MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS, } from "@angular/material-moment-adapter";
+//import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 
 @Component({
   selector: 'app-cita',
   templateUrl: './cita.component.html',
-  styleUrls: ['./cita.component.css']
+  styleUrls: ['./cita.component.css'],
+  
 })
 export class CitaComponent implements OnInit {
 
@@ -29,8 +28,8 @@ export class CitaComponent implements OnInit {
   idClienteNuevo : string;
   idCliente : string;
 
-  municipio: Municipio;
-  municipios: Municipio[];
+  //municipio: Municipio;
+  //municipios: Municipio[];
 
   flagClienteExiste: boolean = false;
 
@@ -46,17 +45,18 @@ export class CitaComponent implements OnInit {
 
     })
 
+    
     this.formCliente = this._fb.group({
       idCliente: ['', [Validators.required, Validators.minLength(3), Validators.pattern('^[0-9]+$')]],
       nombres: ['', [Validators.required, Validators.minLength(3)]],
       apellidos: ['', [Validators.required, Validators.minLength(3)]],
       direccion: ['', [Validators.required, Validators.minLength(10)]],
-      municipio: ['', [Validators.required, Validators.minLength(3)]],
-      departamento: ['', [Validators.required, Validators.minLength(3)]],
+      //municipio: ['', [Validators.required, Validators.minLength(3)]],
+      //departamento: ['', [Validators.required, Validators.minLength(3)]],
       telefono: ['', [Validators.required, Validators.minLength(6), Validators.pattern('^[0-9]+$')]],
-      email: ['', Validators.pattern(('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$'))],
+      //email: ['', Validators.pattern(('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$'))],
       sexo: ['', [Validators.required, Validators.minLength(1)]],
-      fechaNacimiento: ['', [Validators.required, Validators.minLength(6)]],
+      //fechaNacimiento: ['', [Validators.required, Validators.minLength(6)]],
       caracteristicas: [],
       fechaCreacion: [],
       citas: [],
@@ -72,8 +72,6 @@ export class CitaComponent implements OnInit {
 
     this.idClienteNuevo = this._activatedRoute.snapshot.params['idCliente'];
     
-    console.log("evalua si es cliente nuevo");
-    console.log(this.idClienteNuevo);
     
     if(this.idClienteNuevo!=null){
       this.flagClienteExiste = true;
@@ -96,7 +94,7 @@ export class CitaComponent implements OnInit {
 
   public getCitaContent(idCliente: string) {
     this.getCliente(idCliente);
-    this.getMunicipios();
+    //this.getMunicipios();
   }
 
   public getCliente(idCliente: string) {
@@ -113,31 +111,25 @@ export class CitaComponent implements OnInit {
         this.formCliente.controls.nombres.disable();
         this.formCliente.controls.apellidos.disable();
         this.formCliente.controls.direccion.disable();
-        this.formCliente.controls.municipio.disable();
-        this.formCliente.controls.departamento.disable();
+        //this.formCliente.controls.municipio.disable();
+        //this.formCliente.controls.departamento.disable();
         this.formCliente.controls.telefono.disable();
-        this.formCliente.controls.email.disable();
+        //this.formCliente.controls.email.disable();
         this.formCliente.controls.sexo.disable();
-        this.formCliente.controls.fechaNacimiento.disable();
+        //this.formCliente.controls.fechaNacimiento.disable();
         this.formCliente.controls.caracteristicas.disable();
         this.flagClienteExiste = true;
-
-
       },
       error => {
         console.log("El negro no existe");
         //this._router.navigate(['cliente',this.idCliente]);
         //this._router.navigate(['cliente']);
-        
         this._router.navigate(['cliente',{id1: "cita", id2: this.idCliente }]);
-        
-        
-        
       }
     );
   }
 
-  getMunicipios() {
+  /*getMunicipios() {
     console.log("cita_ getMunicipios");
     this._clienteService.getMunicipios().subscribe(
       response => {
@@ -147,11 +139,11 @@ export class CitaComponent implements OnInit {
 
       }
     )
-  }
+  }*/
 
-  compararMunicipios(o1: Municipio, o2: Municipio) {
+  /*compararMunicipios(o1: Municipio, o2: Municipio) {
     return o1 === null || o2 === null ? false : o1.id === o2.id;
-  }
+  }*/
 
   addCita() {
     this.cita = this.formCita.value;

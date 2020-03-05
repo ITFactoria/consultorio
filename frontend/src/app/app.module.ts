@@ -2,7 +2,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from "@angular/common/http";
-import { DatePipe } from "@angular/common";
+import { DatePipe, registerLocaleData } from "@angular/common";
+//import { MAT_MOMENT_DATE_ADAPTER_OPTIONS, MatMomentDateModule } from "@angular/material-moment-adapter";
+//import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+
+
+
 
 //Material
 import { MaterialModule } from '../app/material/material.module';
@@ -52,10 +57,11 @@ import { EstadoCitaPipe } from './pipes/estado-cita.pipe';
     HttpClientModule,
     BrowserAnimationsModule,
     MaterialModule,
+    //MatMomentDateModule
   ],
   providers: [
     ClientesService,
-    DatePipe
+    DatePipe,
   ],
   bootstrap: [AppComponent]
 })

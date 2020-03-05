@@ -5,7 +5,7 @@ import { ClienteService } from "../../services/cliente.service";
 import { Icliente } from 'src/app/interfaces/icliente';
 import swal from 'sweetalert2';
 import { DatePipe } from '@angular/common';
-import { Municipio } from 'src/app/clases/municipio';
+//import { Municipio } from 'src/app/clases/municipio';
 
 
 @Component({
@@ -20,8 +20,8 @@ export class ClienteComponent implements OnInit {
   target: string;
 
   cliente: Icliente;
-  municipio: Municipio;
-  municipios: Municipio[];
+  //municipio: Municipio;
+  //municipios: Municipio[];
 
   userMessage: string;
   flagOperacionExitosa = false;
@@ -34,7 +34,7 @@ export class ClienteComponent implements OnInit {
   */
 
   flagAccionCliente: number;
-  formularioSubmitted : boolean = false;
+  formularioSubmitted: boolean = false;
 
 
   constructor(
@@ -45,79 +45,61 @@ export class ClienteComponent implements OnInit {
     private _fb: FormBuilder) { }
 
   ngOnInit() {
-
-    console.log("cliente.nginit")
-    this.idCliente = this._activatedRoute.snapshot.params['idCliente'];
-
+    
+    
+    console.log("cliente component init");
+    
+    //Source page
     this.target = this._activatedRoute.snapshot.params['id1'];
-    this.idCliente = this._activatedRoute.snapshot.params['id2'];
-
     console.log(this.target);
+
+    
+    if (this.target=="cita"){
+      console.log("cliente llamado x cita");
+      this.idCliente = this._activatedRoute.snapshot.params['id2'];
+    }
+    else{
+      console.log("cliente llamado x cliente");
+      this.idCliente = this._activatedRoute.snapshot.params['idCliente'];
+    }
+
+    console.log("cliente definitivo");
     console.log(this.idCliente);
-    
-    
-    /*this.formulario = new FormGroup({
-      'idCliente': new FormControl('', [Validators.required, Validators.minLength(3),Validators.pattern('^[0-9]+$')]),
-      'nombres': new FormControl('', [Validators.required, Validators.minLength(3)]),
-      'apellidos': new FormControl('', [Validators.required, Validators.minLength(3)]),
-      'direccion': new FormControl('', [Validators.required, Validators.minLength(10)]),
-      'municipio': new FormControl('', [Validators.required, Validators.minLength(3)]),
-      'municipio1' : new FormGroup({
-        'id': new FormControl(),
-        'nombre' : new FormControl()
-      }),
-      'departamento': new FormControl('', [Validators.required, Validators.minLength(3)]),
-      'telefono': new FormControl('', [Validators.required, Validators.minLength(6),Validators.pattern('^[0-9]+$')]),
-      'email': new FormControl('',Validators.pattern(('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$'))),
-      'sexo': new FormControl('', [Validators.required, Validators.minLength(1)]),
-      'fechaNacimiento': new FormControl('', [Validators.required, Validators.minLength(6)]),
-      'caracteristicas': new FormControl(),
-      'fechaCreacion': new FormControl(),
-    })*/
+
+
 
     this.formulario = this._fb.group({
       idCliente: ['', [Validators.required, Validators.minLength(3), Validators.pattern('^[0-9]+$')]],
       nombres: ['', [Validators.required, Validators.minLength(3)]],
       apellidos: ['', [Validators.required, Validators.minLength(3)]],
-      direccion: [''],
-      municipio: ['', [Validators.required, Validators.minLength(3)]],
-      departamento: [''],
+      direccion: ['', [Validators.required, Validators.minLength(3)]],
+      //municipio: ['', [Validators.required, Validators.minLength(3)]],
+      //departamento: [''],
       telefono: ['', [Validators.required, Validators.minLength(6), Validators.pattern('^[0-9]+$')]],
-      email: [''],
+      //email: [''],
       //email: ['',Validators.pattern(('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$'))],
       sexo: ['', [Validators.required, Validators.minLength(1)]],
-      fechaNacimiento: ['', [Validators.required, Validators.minLength(6)]],
+      //fechaNacimiento: ['', [Validators.required, Validators.minLength(6)]],
       caracteristicas: [],
       fechaCreacion: [],
+      citas: []
     })
-    
 
-    if (this.idCliente == null || this.target=="cita") {
+
+    
+    if (this.idCliente == null || this.target == "cita") {
       //Adicionar Cliente
       this.flagAccionCliente = 1;
-      this.getMunicipios();
-      if(this.target=="cita")
-        {this.formulario.controls.idCliente.setValue(this.idCliente);}
+      //this.getMunicipios();
+      if (this.target == "cita") { this.formulario.controls.idCliente.setValue(this.idCliente); }
     }
     else {
       //Actualizar Cliente
-      console.log(`Actualizar Cliente No. ${this.idCliente}`);
+      console.log(`Actualizar Clientesito No. ${this.idCliente}`);
       this.flagAccionCliente = 2;
       this.getCliente(this.idCliente);
-      this.getMunicipios();
-
-
-      /*this.formulario.controls.idCliente.disable();
-      this.formulario.controls.nombres.disable();
-      this.formulario.controls.apellidos.disable();
-      this.formulario.controls.direccion.disable();
-      this.formulario.controls.municipio.disable();
-      this.formulario.controls.departamento.disable();
-      this.formulario.controls.telefono.disable();
-      this.formulario.controls.email.disable();
-      this.formulario.controls.sexo.disable();
-      this.formulario.controls.fechaNacimiento.disable();
-      this.formulario.controls.caracteristicas.disable();*/
+      this.formulario.controls.idCliente.disable();
+      //this.getMunicipios();
 
 
     }
@@ -131,12 +113,9 @@ export class ClienteComponent implements OnInit {
   getCliente(idCliente: string) {
     this._clienteService.getCliente(idCliente).subscribe(
       response => {
+        console.log(response);
         this.cliente = response;
         this.formulario.setValue(this.cliente);
-        console.log("nunucipio");
-
-        console.log(this.cliente.municipio.nombre);
-
 
       },
       error => { }
@@ -145,7 +124,7 @@ export class ClienteComponent implements OnInit {
 
   }
 
-  getMunicipios() {
+  /*getMunicipios() {
     console.log("gerMunicipios");
     this._clienteService.getMunicipios().subscribe(
       response => {
@@ -155,15 +134,15 @@ export class ClienteComponent implements OnInit {
 
       }
     )
-  }
+  }*/
 
-  compararMunicipios(o1: Municipio, o2: Municipio) {
+  /*compararMunicipios(o1: Municipio, o2: Municipio) {
     return o1 === null || o2 === null ? false : o1.id === o2.id;
-  }
+  }*/
 
 
 
-  updateCliente(idCliente: string) {
+  /*updateCliente(idCliente: string) {
     console.log(`UpdateCliente No: ${this.formulario.controls.idCliente.value}`);
     this.flagAccionCliente = 3;
     this.formulario.controls.nombres.enable();
@@ -176,7 +155,7 @@ export class ClienteComponent implements OnInit {
     this.formulario.controls.sexo.enable();
     this.formulario.controls.fechaNacimiento.enable();
     this.formulario.controls.caracteristicas.enable();
-  }
+  }*/
 
   submitForm() {
     this.formularioSubmitted = true;
@@ -184,8 +163,6 @@ export class ClienteComponent implements OnInit {
       case 1: {
         //Add Cliente
         console.log("Cliente.AddCliente")
-
-
         this.cliente = this.formulario.value;
         this.cliente.fechaCreacion = this._datePipe.transform(new Date(), 'yyyy-mm-dd');
         this._clienteService.addCliente(this.cliente).subscribe(
@@ -216,7 +193,7 @@ export class ClienteComponent implements OnInit {
       }
       case 2: {
         //Update Cliente
-
+        console.log("Cliente.UpdCliente")
         this.cliente = this.formulario.value;
         this.cliente.idCliente = this.formulario.controls.idCliente.value;
 

@@ -48,32 +48,34 @@ public class Cliente implements Serializable{
     @Size(min=4, max=100)
     private String apellidos;
     
+    @NotEmpty
+    @Size(min=4, max=100)
     private String direccion;
     
-    @NotNull(message="El Municipo es requerido")
+    //@NotNull(message="El Municipo es requerido")
     //@Size(min=4, max=100)
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "municipio_id")
-    @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
-    private Municipio municipio;
+    //@ManyToOne(fetch = FetchType.LAZY)
+    //@JoinColumn(name = "municipio_id")
+    //@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
+    //private Municipio municipio;
     //private String municipio;
     
-    private String departamento;
+    //private String departamento;
     
     @NotEmpty
     @Size(min=4, max=10)
     private String telefono;
     
-    @Email
-    private String email;
+    /*@Email
+    private String email;*/
     
     @NotEmpty
     @Size(min=1, max=1)
     private String sexo;
     
-    @NotNull
-    @Temporal(DATE)
-    private Date fechaNacimiento;
+    //@NotNull
+    //@Temporal(DATE)
+    //private Date fechaNacimiento;
     
     @Size(min=4, max=200)
     private String caracteristicas;
@@ -140,29 +142,35 @@ public class Cliente implements Serializable{
         this.telefono = telefono;
     }
 
-    public void setMunicipio(Municipio municipio) {
+    /*public void setMunicipio(Municipio municipio) {
         this.municipio = municipio;
-    }
+    }*/
+    
+    /*public void setMunicipio(String municipio) {
+        this.municipio = municipio;
+    }*/
+    
 
-    public void setDepartamento(String departamento) {
+    /*public void setDepartamento(String departamento) {
         this.departamento = departamento;
-    }
+    }*/
 
     public void setFechaCreacion(Date fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
     }
 
-    public void setEmail(String email) {
+    /*public void setEmail(String email) {
         this.email = email;
-    }
+    }*/
 
     public void setSexo(String sexo) {
         this.sexo = sexo;
     }
 
+    /*
     public void setfechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
-    }
+    }*/
 
     public void setCaracteristicas(String caracteristicas) {
         this.caracteristicas = caracteristicas;
@@ -188,25 +196,30 @@ public class Cliente implements Serializable{
         return telefono;
     }
 
-    public Municipio getMunicipio() {
+    /*public Municipio getMunicipio() {
         return municipio;
-    }
+    }*/
+    
+    /*public String getMunicipio() {
+        return municipio;
+    }*/
+    
 
-    public String getDepartamento() {
+    /*public String getDepartamento() {
         return departamento;
-    }
+    }*/
 
-    public String getEmail() {
+    /*public String getEmail() {
         return email;
-    }
+    }*/
 
     public String getSexo() {
         return sexo;
     }
 
-    public Date getfechaNacimiento() {
+    /*public Date getfechaNacimiento() {
         return fechaNacimiento;
-    }
+    }*/
 
     public String getCaracteristicas() {
         return caracteristicas;

@@ -35,7 +35,7 @@
         </mat-card-header>
         <mat-card-content>
           <form [formGroup]='formCliente' (ngSubmit)='submitForm(formulario)'>
-            <mat-grid-list cols="3" rowHeight="6:1">
+            <mat-grid-list cols="3" rowHeight="80px">
               <mat-grid-tile>
                 <mat-form-field class="example-full-width">
                   <input matInput placeholder="Cédula" formControlName="idCliente">
@@ -52,14 +52,19 @@
                 </mat-form-field>
               </mat-grid-tile>
             </mat-grid-list>
-            <mat-grid-list cols="4" rowHeight="3:1">
-              <mat-grid-tile>
+            <mat-grid-list cols="3" rowHeight="80px">
+              <!-- <mat-grid-tile>
                 <mat-form-field class="example-full-width">
                   <mat-label>Municipio</mat-label>
                   <mat-select formControlName="municipio" [compareWith]="compararMunicipios">
                     <mat-option *ngFor="let municipio of municipios" [value]="municipio">{{municipio.nombre}}
                     </mat-option>
                   </mat-select>
+                </mat-form-field>
+              </mat-grid-tile> -->
+              <mat-grid-tile>
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Direccion" formControlName="direccion">
                 </mat-form-field>
               </mat-grid-tile>
               <mat-grid-tile>
@@ -72,19 +77,20 @@
                   <input matInput placeholder="Sexo" formControlName="sexo">
                 </mat-form-field>
               </mat-grid-tile>
-              <mat-grid-tile>
+              <!-- <mat-grid-tile>
                 <mat-form-field class="example-full-width">
                   <input matInput placeholder="Fecha Nacimiento" formControlName="fechaNacimiento">
                 </mat-form-field>
-              </mat-grid-tile>
+              </mat-grid-tile> -->
+              
             </mat-grid-list>
-            <mat-grid-list cols="1" rowHeight="15:1">
+            <mat-grid-list cols="1" rowHeight="80px">
               <mat-grid-tile>
                 <mat-form-field class="example-full-width">
                   <input matInput placeholder="Sintomatologia" formControlName="caracteristicas">
                 </mat-form-field>
               </mat-grid-tile>
-            </mat-grid-list>
+            </mat-grid-list> 
           </form>
         </mat-card-content>
       </mat-card>

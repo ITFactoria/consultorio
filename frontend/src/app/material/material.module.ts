@@ -7,12 +7,13 @@ import {  MatGridListModule,
           MatInputModule,
           MatRadioModule,
           MatDatepickerModule,
-          MatNativeDateModule, 
           MatToolbarModule, 
           MatSelectBase,
           MatSelectModule,
           MatPaginatorModule,
           MatSortModule,
+          MatNativeDateModule
+          
         } from "@angular/material";
 
 @NgModule({
@@ -26,11 +27,11 @@ import {  MatGridListModule,
     MatInputModule,
     MatRadioModule,
     MatDatepickerModule,
-    MatNativeDateModule,
     MatToolbarModule,
     MatSelectModule,
     MatSortModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatNativeDateModule
     
   ],
   exports:[
@@ -41,11 +42,11 @@ import {  MatGridListModule,
     MatInputModule,
     MatRadioModule,
     MatDatepickerModule,
-    MatNativeDateModule,
     MatToolbarModule,
     MatSelectModule,
     MatSortModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatNativeDateModule
 
   ]
 })

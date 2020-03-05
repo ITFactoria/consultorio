@@ -2,13 +2,12 @@
   <mat-card class="card">
     <mat-card-header>
       <mat-card-title class="card-title text-center" *ngIf="flagAccionCliente === 1">Crear Paciente</mat-card-title>
-      <mat-card-title class="card-title text-center" *ngIf="flagAccionCliente === 2">Actualizar Paciente
-      </mat-card-title>
+      <mat-card-title class="card-title text-center" *ngIf="flagAccionCliente === 2">Actualizar Paciente</mat-card-title>
 
     </mat-card-header>
     <mat-card-content>
       <form [formGroup]='formulario' (ngSubmit)='submitForm()'>
-        <mat-grid-list cols="3" rowHeight="6:1">
+        <mat-grid-list cols="3" rowHeight="80px">
           <mat-grid-tile>
             <mat-form-field class="example-full-width">
               <input matInput placeholder="Cédula" formControlName="idCliente">
@@ -32,18 +31,26 @@
             </mat-form-field>
           </mat-grid-tile>
         </mat-grid-list>
-        <mat-grid-list cols="4" rowHeight="3:1">
-          <mat-grid-tile>
+        <mat-grid-list cols="3" rowHeight="80px">
+          <!-- <mat-grid-tile>
             <mat-form-field class="example-full-width">
-              <mat-label>Municipio</mat-label>
-              <mat-select formControlName="municipio" [compareWith]="compararMunicipios">
+              <mat-label>Direccion</mat-label>
+              <mat-select formControlName="direccion" [compareWith]="compararMunicipios">
                 <mat-option *ngFor="let municipio of municipios" [value]="municipio">{{municipio.nombre}}
                 </mat-option>
               </mat-select>
               <mat-error *ngIf="hasError('municipio','required')">Campo requerido</mat-error>
               <mat-error *ngIf="hasError('municipio','minlength')">Minimo 3 caracteres</mat-error>
             </mat-form-field>
+          </mat-grid-tile> -->
+          <mat-grid-tile>
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Direccion" formControlName="direccion">
+              <mat-error *ngIf="hasError('direccion','required')">Campo requerido</mat-error>
+              <mat-error *ngIf="hasError('direccion','minlength')">Minimo 3 caracteres</mat-error>
+            </mat-form-field>
           </mat-grid-tile>
+
           <mat-grid-tile>
             <mat-form-field class="example-full-width">
               <input matInput placeholder="Telefono" formControlName="telefono">
@@ -65,7 +72,7 @@
 
             </mat-form-field>
           </mat-grid-tile>
-          <mat-grid-tile>
+          <!-- <mat-grid-tile>
             <mat-form-field class="example-full-width">
               <input matInput [matDatepicker]="picker" placeholder="Fecha de Nacimiento"
                 formControlName="fechaNacimiento">
@@ -74,20 +81,21 @@
               <mat-error *ngIf="hasError('email','required')">Campo requerido</mat-error>
               <mat-error *ngIf="hasError('email','minlength')">Minimo 6 caracteres</mat-error>
             </mat-form-field>
-          </mat-grid-tile>
+          </mat-grid-tile> -->
+          <!-- <mat-grid-tile>
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Sintomatologia" formControlName="caracteristicas">
+            </mat-form-field>
+          </mat-grid-tile> -->
         </mat-grid-list>
-        <mat-grid-list cols="1" rowHeight="15:1">
+        <mat-grid-list cols="1" rowHeight="80px">
           <mat-grid-tile>
             <mat-form-field class="example-full-width">
               <input matInput placeholder="Sintomatologia" formControlName="caracteristicas">
             </mat-form-field>
           </mat-grid-tile>
         </mat-grid-list>
-
-
-
-
-        <mat-grid-list cols="2" rowHeight="5:1">
+        <mat-grid-list cols="2" rowHeight="100px">
           <mat-grid-tile>
             <!-- <button mat-raised-button color="primary" [disabled]="!formulario.valid || flagAccionCliente == 1">Guardar</button> -->
             <button mat-raised-button color="primary" [disabled]="!formulario.valid">Guardar</button>
@@ -109,219 +117,3 @@
 </div>
 
 
-<div class="container main-container">
-
-  <div class="card border-info mb-3">
-    <!-- <div class="card-header">Consulta de cliente</div> -->
-    <!-- <div class="card-body text-info"> -->
-
-    <!-- <div class="alert alert-success" role="alert" *ngIf="flagAccionCliente==1 && flagOperacionExitosa==true">
-        {{userMessage}}
-      </div>
-      <div class="alert alert-danger" role="alert" *ngIf="flagAccionCliente==1 && flagOperacionExitosa==false">
-        {{userMessage}}
-      </div>
-      <div class="alert alert-success" role="alert" *ngIf="flagAccionCliente==3 && flagOperacionExitosa==true">
-        {{userMessage}}
-      </div>
-      <div class="alert alert-danger" role="alert" *ngIf="flagAccionCliente==3 && flagOperacionExitosa==false">
-        {{userMessage}}
-      </div> -->
-
-
-
-
-    <!-- <div>
-              <form [formGroup]='formulario' (ngSubmit)='submitForm(formulario)'>
-
-        <div class="form-row">
-
-          <div class="form-group col-md-2">
-            <label for="idCliente">C&eacute;dula</label>
-            <input type="text" class="form-control" placeholder="Cédula" formControlName="idCliente">
-
-            <div class="alert-danger"
-              *ngIf="formulario.get('idCliente').invalid && (formulario.get('idCliente').dirty || formulario.get('idCliente').touched)">
-              <div *ngIf="formulario.get('idCliente').errors.required">
-                Campo requerido
-              </div>
-              <div *ngIf="formulario.get('idCliente').errors.minlength">
-                Minimo 3 caracteres
-              </div>
-            </div>
-          </div>
-
-          <div class="form-group col-md-5">
-            <label for="nombres">Nombres</label>
-            <input type="text" class="form-control" placeholder="Nombres" formControlName="nombres">
-            <div class="alert-danger"
-              *ngIf="formulario.get('nombres').invalid && (formulario.get('nombres').dirty || formulario.get('nombres').touched)">
-              <div *ngIf="formulario.get('nombres').errors.required">
-                Campo requerido
-              </div>
-              <div *ngIf="formulario.get('nombres').errors.minlength">
-                Minimo 3 caracteres
-              </div>
-            </div>
-
-          </div>
-
-          <div class="form-group col-md-5">
-            <label for="apellidos">Apellidos</label>
-            <input type="text" class="form-control" placeholder="Apellidos" formControlName="apellidos">
-            <div class="alert-danger"
-              *ngIf="formulario.get('apellidos').invalid && (formulario.get('apellidos').dirty || formulario.get('apellidos').touched)">
-              <div *ngIf="formulario.get('apellidos').errors.required">
-                Campo requerido
-              </div>
-              <div *ngIf="formulario.get('apellidos').errors.minlength">
-                Minimo 3 caracteres
-              </div>
-            </div>
-          </div>
-        </div>
-
-        Segunda Linea
-        <div class="form-row">
-          <div class="form-group col-md-8">
-            <div class="form-group">
-              <label for="direccion">Dirección</label>
-              <input type="text" class="form-control" placeholder="Direccion" formControlName="direccion">
-              <div class="alert-danger"
-                *ngIf="formulario.get('direccion').invalid && (formulario.get('direccion').dirty || formulario.get('direccion').touched)">
-                <div *ngIf="formulario.get('direccion').errors.required">
-                  Campo requerido
-                </div>
-                <div *ngIf="formulario.get('direccion').errors.minlength">
-                  Minimo 10 caracteres
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="form-group col-md-2">
-            <label for="municipio">Municipio</label>
-            <input type="text" class="form-control" placeholder="Municipio" formControlName="municipio">
-            <div class="alert-danger"
-              *ngIf="formulario.get('municipio').invalid && (formulario.get('municipio').dirty || formulario.get('municipio').touched)">
-              <div *ngIf="formulario.get('municipio').errors.required">
-                Campo requerido
-              </div>
-              <div *ngIf="formulario.get('municipio').errors.minlength">
-                Minimo 4 caracteres
-              </div>
-            </div>
-
-          </div>
-
-          <div class="form-group col-md-2">
-            <label for="departamento">Departamento</label>
-            <select id="inputState" class="form-control" placeholder="Departamento" formControlName="departamento">
-              <option selected>Choose...</option>
-              <option>...</option>
-            </select>
-          </div>
-
-        </div>
-
-        Tercera linea
-        <div class="form-row">
-          <div class="form-group col-md-3">
-            <label for="telefono">Teléfono</label>
-            <input type="text" class="form-control" placeholder="Teléfono" formControlName="telefono">
-            <div class="alert-danger"
-              *ngIf="formulario.get('telefono').invalid && (formulario.get('telefono').dirty || formulario.get('telefono').touched)">
-              <div *ngIf="formulario.get('telefono').errors.required">
-                Campo requerido
-              </div>
-              <div *ngIf="formulario.get('telefono').errors.minlength">
-                Minimo 6 caracteres
-              </div>
-            </div>
-          </div>
-
-          <div class="form-group col-md-6">
-            <label for="email">Correo</label>
-            <input type="email" class="form-control" placeholder="Email" formControlName="email">
-            <div class="alert-danger"
-              *ngIf="formulario.get('email').invalid && (formulario.get('email').dirty || formulario.get('email').touched)">
-              <div *ngIf="formulario.get('email').errors.required">
-                Campo requerido
-              </div>
-              <div *ngIf="formulario.get('email').errors.email">
-                Formato de correo invalido
-              </div>
-            </div>
-          </div>
-
-          <div class="form-group col-md-2">
-            <label for="sexo">Sexo</label>
-
-            <select name="sexo" id="sexo" placeholder="Sexo" class="form-control">
-              <option value="S">Seleccionar...</option>
-              <option value="M">Mujer</option>
-              <option value="F">Hombre</option>
-            </select>
-
-            <div class="alert-danger"
-              *ngIf="formulario.get('sexo').invalid && (formulario.get('sexo').dirty || formulario.get('sexo').touched)">
-              <div *ngIf="formulario.get('sexo').errors.required">
-                Campo requerido
-              </div>
-              <div *ngIf="formulario.get('sexo').errors.minlength">
-                Minimo 6 caracteres
-              </div>
-            </div>
-          </div>
-
-          <div class="form-group col-md-1">
-            <label for="edad">Edad</label>
-            <input type="text" class="form-control" placeholder="Edad" formControlName="edad">
-            <div class="alert-danger"
-              *ngIf="formulario.get('edad').invalid && (formulario.get('edad').dirty || formulario.get('edad').touched)">
-              <div *ngIf="formulario.get('edad').errors.required">
-                Campo requerido
-              </div>
-              <div *ngIf="formulario.get('edad').errors.minlength">
-                Minimo 1 caracter
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-        Cuarta linea
-        <div class="form-row">
-          <div class="form-group col-md-12">
-            <label for="caracteristicas">Sintomatología</label>
-            <textarea class="form-control" rows="3" formControlName="caracteristicas"
-              placeholder="Sintomatología"></textarea>
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group col-md-4">
-            <button type="submit" class="btn btn-info"
-              [disabled]="!formulario.valid || flagAccionCliente == 2">Guardar</button>
-          </div>
-          <div class="form-group col-md-4">
-            <button type="button" class="btn btn-danger" [disabled]="!formulario.valid || flagAccionCliente == 1"
-              (click)='updateCliente()'>Editar</button>
-          </div>
-
-          <div class="form-group col-md-4">
-            <button type="submit" class="btn btn-secondary" [routerLink]="['/clientes']"
-              routerLinkActive="router-link-active">Regresar</button>
-          </div>
-        </div>
-
-      </form>
-
-
-      </div> -->
-
-    <!-- </div> -->
-  </div>
-  <!-- {{formulario.valid}} -->
-
-</div>

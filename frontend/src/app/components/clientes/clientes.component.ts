@@ -5,6 +5,8 @@ import { Router } from "@angular/router";
 import Swal from 'sweetalert2';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from "@angular/material/sort";
+
 
 
 
@@ -22,9 +24,12 @@ export class ClientesComponent implements OnInit {
   flagClienteEliminado = false;
   flagProblemasTecnicos = false;
 
-  displayedColumns: string[] = ['idCliente', 'nombres', 'apellidos', 'municipio', 'telefono','consultar','eliminar'];
+  displayedColumns: string[] = ['idCliente', 'nombres', 'apellidos', 'direccion', 'telefono', 'consultar', 'eliminar'];
   dataSource = new MatTableDataSource();
-  //@ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+
 
 
   constructor(private _clientesService: ClientesService, private _router: Router) { }
@@ -32,7 +37,8 @@ export class ClientesComponent implements OnInit {
   ngOnInit() {
 
     this.getClientes();
-    
+
+
 
     //this.dataSource.paginator = this.paginator;
   }
@@ -49,6 +55,10 @@ export class ClientesComponent implements OnInit {
       response => {
         this.clientes = response;
         this.dataSource = new MatTableDataSource<Icliente>(this.clientes);
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+
+
       },
       error => {
         console.log('Error al consultar clientes');
@@ -58,13 +68,16 @@ export class ClientesComponent implements OnInit {
       }
     );
 
+  }
 
+  applyFilterId(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
 
   getCliente(idCliente: string) {
     this._router.navigate(['read-cliente', idCliente]);
-
   }
 
   addCliente() {

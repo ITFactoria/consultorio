@@ -3,7 +3,7 @@
     <mat-card-header>
       <mat-card-title>Gestión de Citas</mat-card-title>
       <mat-card-subtitle>
-        <mat-grid-list cols="1" rowHeight="2:1">
+        <mat-grid-list cols="1" rowHeight="70px">
           <mat-grid-tile>
             <button mat-raised-button color="primary" type="submit" (click)="addCita()">Crear Cita Nueva</button>
           </mat-grid-tile>
@@ -13,17 +13,17 @@
     <mat-card-content>
 
       <form [formGroup]="filterForm">
-        <mat-grid-list cols="4" rowHeight="5:1">
+        <mat-grid-list cols="4" rowHeight="50px">
           <mat-grid-tile>
             <mat-form-field>
-              <mat-label>Cedula</mat-label>
-              <input matInput (keyup)="applyFilterId($event)" placeholder="Cedula">
+              <mat-label>Cedula a consultar</mat-label>
+              <input matInput (keyup)="applyFilterId($event)" placeholder="Cedula a consultar">
             </mat-form-field>
           </mat-grid-tile>
           <mat-grid-tile>
             <div class="date-block__list">
               <mat-form-field>
-                <input matInput [matDatepicker]="fromDate" placeholder="Fecha inicial" formControlName="fromDate">
+                <input matInput [matDatepicker]="fromDate" placeholder="Fecha inicial a consultar" formControlName="fromDate">
                 <mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
                 <mat-datepicker #fromDate></mat-datepicker>
               </mat-form-field>
@@ -32,21 +32,18 @@
           <mat-grid-tile>
             <div class="date-block__list">
               <mat-form-field>
-                <input matInput [matDatepicker]="toDate" placeholder="Fecha Final" formControlName="toDate">
+                <input matInput [matDatepicker]="toDate" placeholder="Fecha final a consultar" formControlName="toDate">
                 <mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
                 <mat-datepicker #toDate></mat-datepicker>
               </mat-form-field>
             </div>
           </mat-grid-tile>
           <mat-grid-tile>
-            <button mat-button color="primary" class="primary" (click)="applyFilter()">Filtrar Fechas</button>
+            <button mat-button mat-raised-button color="primary" class="primary" (click)="applyFilter()">Consultar por fechas</button>
           </mat-grid-tile>
         </mat-grid-list>
       </form>
       <br>
-
-
-
 
 
       <div class="mat-elevation-z8">
@@ -63,6 +60,7 @@
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha </th>
             <td mat-cell *matCellDef="let cita"> {{cita.fechaAsignacion | date: 'dd/MM/yyyy'}}</td>
           </ng-container>
+
 
           <!-- Hora Column -->
           <!-- <ng-container matColumnDef="hora" class="header">
