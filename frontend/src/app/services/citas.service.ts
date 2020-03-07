@@ -36,6 +36,7 @@ export class CitasService {
   addCita(cita: Cita) : Observable<Cita>{
     console.log("addCita Service");
     console.log(cita);
+    
     return this._httpClient.post<Cita>(`${this.urlBackend}/citas`,cita,{headers:this.httpHeaders}).
     pipe(
       catchError(e=>{

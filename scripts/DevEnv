@@ -19,34 +19,41 @@ insert into municipios (id, nombre) values( 10,'Aguachica');
 
 
 /*Populate tabla clientes*/
-insert into clientes(id_cliente, nombres, apellidos, direccion,municipio_id,departamento,telefono,email,sexo,fecha_nacimiento,caracteristicas,fecha_Creacion) values ('79514933','chikitina preciosa', 'negrito esclavo', 'avendida nore carrera sur', 1,'antioquia', '3102345678', 'chikis@gmail.com', 'F', '1979-01-13','dolor cabeza', '2019-05-13');
-/*insert into clientes(id_cliente, nombres, apellidos, direccion,municipio_id,departamento,telefono,email,sexo,fecha_nacimiento,caracteristicas,fecha_Creacion) values ('12121234','eusebio maria', 'amazonas tumaco', 'avendida nore carrera sur', 2,'antioquia', '3102345678', 'chikis@gmail.com', 'F', '1979-01-13','dolor cabeza', '2019-05-14');
-insert into clientes(id_cliente, nombres, apellidos, direccion,municipio_id,departamento,telefono,email,sexo,fecha_nacimiento,caracteristicas,fecha_Creacion) values ('678976379','gulupa tomate', 'papaya chontaduro', 'avendida nore carrera sur', 3,'antioquia', '3102345678', 'chikis@gmail.com', 'F', '1979-01-13','dolor cabeza', '2019-01-13');
-insert into clientes(id_cliente, nombres, apellidos, direccion,municipio_id,departamento,telefono,email,sexo,fecha_nacimiento,caracteristicas,fecha_Creacion) values ('54545453','chonto perol1', 'papaya chontaduro', 'avendida nore carrera sur', 4,'antioquia', '3102345678', 'chikis@gmail.com', 'F', '1979-01-13','dolor cabeza', '2019-06-13');
-insert into clientes(id_cliente, nombres, apellidos, direccion,municipio_id,departamento,telefono,email,sexo,fecha_nacimiento,caracteristicas,fecha_Creacion) values ('12312345','bocadillo santurron', 'papaya chontaduro', 'avendida nore carrera sur', 5,'antioquia', '3102345678', 'chikis@gmail.com', 'F', '1979-01-13','dolor cabeza', '2019-01-13');
-insert into clientes(id_cliente, nombres, apellidos, direccion,municipio_id,departamento,telefono,email,sexo,fecha_nacimiento,caracteristicas,fecha_Creacion) values ('79514932','chikitina preciosa', 'negrito esclavo', 'avendida nore carrera sur', 1,'antioquia', '3102345678', 'chikis@gmail.com', 'F', '1979-01-13','dolor cabeza', '2019-01-13');
-insert into clientes(id_cliente, nombres, apellidos, direccion,municipio_id,departamento,telefono,email,sexo,fecha_nacimiento,caracteristicas,fecha_Creacion) values ('12121299','eusebio maria', 'amazonas tumaco', 'avendida nore carrera sur', 2,'antioquia', '3102345678', 'chikis@gmail.com', 'F', '1979-02-13','dolor cabeza', '2019-01-13');
-insert into clientes(id_cliente, nombres, apellidos, direccion,municipio_id,departamento,telefono,email,sexo,fecha_nacimiento,caracteristicas,fecha_Creacion) values ('678976354','gulupa maraciya', 'papaya chontaduro', 'avendida nore carrera sur', 3,'antioquia', '3102345678', 'chikis@gmail.com', 'F', '1979-12-13','dolor cabeza', '2019-01-13');
-insert into clientes(id_cliente, nombres, apellidos, direccion,municipio_id,departamento,telefono,email,sexo,fecha_nacimiento,caracteristicas,fecha_Creacion) values ('545454','chonto perol2', 'papaya chontaduro', 'avendida nore carrera sur', 4,'antioquia', '3102345678', 'chikis@gmail.com', 'F', '1979-01-23','dolor cabeza', '2019-01-13');
-insert into clientes(id_cliente, nombres, apellidos, direccion,municipio_id,departamento,telefono,email,sexo,fecha_nacimiento,caracteristicas,fecha_Creacion) values ('79514930','chikitina hemosa', 'negrito esclavo', 'avendida nore carrera sur', 5,'antioquia', '3102345678', 'chikis@gmail.com', 'F', '1979-10-28','dolor cabeza', '2019-01-13');
-insert into clientes(id_cliente, nombres, apellidos, direccion,municipio_id,departamento,telefono,email,sexo,fecha_nacimiento,caracteristicas,fecha_Creacion) values ('12121211','eusebio tortuga', 'amazonas tumaco', 'avendida nore carrera sur', 1,'antioquia', '3102345678', 'chikis@gmail.com', 'F', '1979-01-30','dolor cabeza', '2019-01-13');
-insert into clientes(id_cliente, nombres, apellidos, direccion,municipio_id,departamento,telefono,email,sexo,fecha_nacimiento,caracteristicas,fecha_Creacion) values ('678976384','gulupa guayaba', 'papaya chontaduro', 'avendida nore carrera sur', 2,'antioquia', '3102345678', 'chikis@gmail.com', 'F', '1979-01-30','dolor cabeza', '2019-01-13');
-insert into clientes(id_cliente, nombres, apellidos, direccion,municipio_id,departamento,telefono,email,sexo,fecha_nacimiento,caracteristicas,fecha_Creacion) values ('54545445','chonto perol3', 'papaya chontaduro', 'avendida nore carrera sur', 3,'antioquia', '3102345678', 'chikis@gmail.com', 'F', '1979-03-30','dolor cabeza', '2019-01-13');
-*/
+insert into clientes(id_cliente, nombres, apellidos, direccion,telefono,sexo,caracteristicas,fecha_Creacion) values ('1122334455','nombre prueba', 'apellido prueba', 'antioquia', '3102345678', 'F','dolor cabeza', '2019-05-13');
+insert into clientes(id_cliente, nombres, apellidos, direccion,telefono,sexo,caracteristicas,fecha_Creacion) values ('678976301','gulupa tomate', 'papaya chontaduro', 'antioquia', '3102345678',  'F','dolor cabeza', '2019-01-13');
+insert into clientes(id_cliente, nombres, apellidos, direccion,telefono,sexo,caracteristicas,fecha_Creacion) values ('678976302','gulupa tomate', 'papaya chontaduro', 'antioquia', '3102345678',  'F','dolor cabeza', '2019-01-13');
+insert into clientes(id_cliente, nombres, apellidos, direccion,telefono,sexo,caracteristicas,fecha_Creacion) values ('678976303','gulupa tomate', 'papaya chontaduro', 'antioquia', '3102345678',  'F','dolor cabeza', '2019-01-13');
+insert into clientes(id_cliente, nombres, apellidos, direccion,telefono,sexo,caracteristicas,fecha_Creacion) values ('678976304','gulupa tomate', 'papaya chontaduro', 'antioquia', '3102345678',  'F','dolor cabeza', '2019-01-13');
+insert into clientes(id_cliente, nombres, apellidos, direccion,telefono,sexo,caracteristicas,fecha_Creacion) values ('678976305','gulupa tomate', 'papaya chontaduro', 'antioquia', '3102345678',  'F','dolor cabeza', '2019-01-13');
+insert into clientes(id_cliente, nombres, apellidos, direccion,telefono,sexo,caracteristicas,fecha_Creacion) values ('678976306','gulupa tomate', 'papaya chontaduro', 'antioquia', '3102345678',  'F','dolor cabeza', '2019-01-13');
+insert into clientes(id_cliente, nombres, apellidos, direccion,telefono,sexo,caracteristicas,fecha_Creacion) values ('678976307','gulupa tomate', 'papaya chontaduro', 'antioquia', '3102345678',  'F','dolor cabeza', '2019-01-13');
+insert into clientes(id_cliente, nombres, apellidos, direccion,telefono,sexo,caracteristicas,fecha_Creacion) values ('678976308','gulupa tomate', 'papaya chontaduro', 'antioquia', '3102345678',  'F','dolor cabeza', '2019-01-13');
+insert into clientes(id_cliente, nombres, apellidos, direccion,telefono,sexo,caracteristicas,fecha_Creacion) values ('678976309','gulupa tomate', 'papaya chontaduro', 'antioquia', '3102345678',  'F','dolor cabeza', '2019-01-13');
+insert into clientes(id_cliente, nombres, apellidos, direccion,telefono,sexo,caracteristicas,fecha_Creacion) values ('678976310','gulupa tomate', 'papaya chontaduro', 'antioquia', '3102345678',  'F','dolor cabeza', '2019-01-13');
+insert into clientes(id_cliente, nombres, apellidos, direccion,telefono,sexo,caracteristicas,fecha_Creacion) values ('678976311','gulupa tomate', 'papaya chontaduro', 'antioquia', '3102345678',  'F','dolor cabeza', '2019-01-13');
+insert into clientes(id_cliente, nombres, apellidos, direccion,telefono,sexo,caracteristicas,fecha_Creacion) values ('678976312','gulupa tomate', 'papaya chontaduro', 'antioquia', '3102345678',  'F','dolor cabeza', '2019-01-13');
+insert into clientes(id_cliente, nombres, apellidos, direccion,telefono,sexo,caracteristicas,fecha_Creacion) values ('678976313','gulupa tomate', 'papaya chontaduro', 'antioquia', '3102345678',  'F','dolor cabeza', '2019-01-13');
+insert into clientes(id_cliente, nombres, apellidos, direccion,telefono,sexo,caracteristicas,fecha_Creacion) values ('678976314','gulupa tomate', 'papaya chontaduro', 'antioquia', '3102345678',  'F','dolor cabeza', '2019-01-13');
+insert into clientes(id_cliente, nombres, apellidos, direccion,telefono,sexo,caracteristicas,fecha_Creacion) values ('678976315','gulupa tomate', 'papaya chontaduro', 'antioquia', '3102345678',  'F','dolor cabeza', '2019-01-13');
+insert into clientes(id_cliente, nombres, apellidos, direccion,telefono,sexo,caracteristicas,fecha_Creacion) values ('678976316','gulupa tomate', 'papaya chontaduro', 'antioquia', '3102345678',  'F','dolor cabeza', '2019-01-13');
+insert into clientes(id_cliente, nombres, apellidos, direccion,telefono,sexo,caracteristicas,fecha_Creacion) values ('678976317','gulupa tomate', 'papaya chontaduro', 'antioquia', '3102345678',  'F','dolor cabeza', '2019-01-13');
+insert into clientes(id_cliente, nombres, apellidos, direccion,telefono,sexo,caracteristicas,fecha_Creacion) values ('678976318','gulupa tomate', 'papaya chontaduro', 'antioquia', '3102345678',  'F','dolor cabeza', '2019-01-13');
+insert into clientes(id_cliente, nombres, apellidos, direccion,telefono,sexo,caracteristicas,fecha_Creacion) values ('678976319','gulupa tomate', 'papaya chontaduro', 'antioquia', '3102345678',  'F','dolor cabeza', '2019-01-13');
+insert into clientes(id_cliente, nombres, apellidos, direccion,telefono,sexo,caracteristicas,fecha_Creacion) values ('678976320','gulupa tomate', 'papaya chontaduro', 'antioquia', '3102345678',  'F','dolor cabeza', '2019-01-13');
+
+
 
 /*Populate tabla citas*/
-insert into citas(id, fecha_asignacion, estado_cita, cliente_id_cliente) values (1,'1979-03-30',0,'79514933');
-/*insert into citas(id, fecha_asignacion, estado_cita, cliente_id_cliente) values (2,'1979-03-30',0,'79514933');
-insert into citas(id, fecha_asignacion, estado_cita, cliente_id_cliente) values (3,'1979-03-30',0,'79514933');
-insert into citas(id, fecha_asignacion, estado_cita, cliente_id_cliente) values (4,'1979-03-30',0,'12312345');
-insert into citas(id, fecha_asignacion, estado_cita, cliente_id_cliente) values (5,'1979-03-30',0,'12312345');
-insert into citas(id, fecha_asignacion, estado_cita, cliente_id_cliente) values (6,'1979-03-30',0,'678976379');
-insert into citas(id, fecha_asignacion, estado_cita, cliente_id_cliente) values (7,'2020-01-13',0,'678976379');
-insert into citas(id, fecha_asignacion, estado_cita, cliente_id_cliente) values (8,'2020-02-13',0,'678976379');
-insert into citas(id, fecha_asignacion, estado_cita, cliente_id_cliente) values (9,'2020-03-13',0,'678976379');
-insert into citas(id, fecha_asignacion, estado_cita, cliente_id_cliente) values (10,'2020-01-13',0,'678976379');
-insert into citas(id, fecha_asignacion, estado_cita, cliente_id_cliente) values (11,'2020-02-13',0,'678976379');
-insert into citas(id, fecha_asignacion, estado_cita, cliente_id_cliente) values (12,'2020-03-13',0,'678976379');*/
+insert into citas(id, fecha_asignacion, estado_cita, cliente_id_cliente) values (1,'2020-13-13',0,'1122334455');
+insert into citas(id, fecha_asignacion, estado_cita, cliente_id_cliente) values (3,'2020-13-13',0,'678976301');
+insert into citas(id, fecha_asignacion, estado_cita, cliente_id_cliente) values (4,'2020-13-13',0,'678976301');
+insert into citas(id, fecha_asignacion, estado_cita, cliente_id_cliente) values (5,'2020-02-13',0,'678976301');
+insert into citas(id, fecha_asignacion, estado_cita, cliente_id_cliente) values (6,'2020-02-13',0,'678976301');
+insert into citas(id, fecha_asignacion, estado_cita, cliente_id_cliente) values (7,'2020-01-13',0,'678976320');
+insert into citas(id, fecha_asignacion, estado_cita, cliente_id_cliente) values (8,'2020-02-13',0,'678976320');
+insert into citas(id, fecha_asignacion, estado_cita, cliente_id_cliente) values (9,'2020-03-13',0,'678976320');
+insert into citas(id, fecha_asignacion, estado_cita, cliente_id_cliente) values (10,'2020-01-13',0,'678976320');
+insert into citas(id, fecha_asignacion, estado_cita, cliente_id_cliente) values (11,'2020-02-13',0,'678976320');
+insert into citas(id, fecha_asignacion, estado_cita, cliente_id_cliente) values (12,'2020-03-13',0,'678976320');
 
 
-Hermosas, grandes, provocativas y maravillosas 

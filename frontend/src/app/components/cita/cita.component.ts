@@ -10,12 +10,14 @@ import Swal from "sweetalert2";
 import { DatePipe } from '@angular/common';
 //import { MAT_MOMENT_DATE_FORMATS, MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS, } from "@angular/material-moment-adapter";
 //import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import * as moment from 'moment';
+
 
 @Component({
   selector: 'app-cita',
   templateUrl: './cita.component.html',
   styleUrls: ['./cita.component.css'],
-  
+
 })
 export class CitaComponent implements OnInit {
 
@@ -24,9 +26,9 @@ export class CitaComponent implements OnInit {
   formConsultaIdCliente: FormGroup;
   formCliente: FormGroup;
   formCita: FormGroup;
-  errores : string[];
-  idClienteNuevo : string;
-  idCliente : string;
+  errores: string[];
+  idClienteNuevo: string;
+  idCliente: string;
 
   //municipio: Municipio;
   //municipios: Municipio[];
@@ -36,8 +38,8 @@ export class CitaComponent implements OnInit {
 
 
   constructor(private _fb: FormBuilder, private _clienteService: ClienteService,
-              private _router: Router, private _citasService: CitasService,
-              private _datePipe: DatePipe, private _activatedRoute : ActivatedRoute) { }
+    private _router: Router, private _citasService: CitasService,
+    private _datePipe: DatePipe, private _activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.formConsultaIdCliente = this._fb.group({
@@ -45,7 +47,7 @@ export class CitaComponent implements OnInit {
 
     })
 
-    
+
     this.formCliente = this._fb.group({
       idCliente: ['', [Validators.required, Validators.minLength(3), Validators.pattern('^[0-9]+$')]],
       nombres: ['', [Validators.required, Validators.minLength(3)]],
@@ -63,7 +65,7 @@ export class CitaComponent implements OnInit {
 
     })
 
-    
+
     this.formCita = this._fb.group({
       //idCita: ['', [Validators.required, Validators.minLength(3),Validators.pattern('^[0-9]+$')]],
       fechaAsignacion: ['', [Validators.required, Validators.minLength(6)]],
@@ -71,13 +73,13 @@ export class CitaComponent implements OnInit {
     })
 
     this.idClienteNuevo = this._activatedRoute.snapshot.params['idCliente'];
-    
-    
-    if(this.idClienteNuevo!=null){
-      this.flagClienteExiste = true;
-      this.formConsultaIdCliente.controls.idCliente.setValue(this.idClienteNuevo) ;
 
-      this.formCliente.controls.idCliente.setValue(this.idClienteNuevo) ;
+
+    if (this.idClienteNuevo != null) {
+      this.flagClienteExiste = true;
+      this.formConsultaIdCliente.controls.idCliente.setValue(this.idClienteNuevo);
+
+      this.formCliente.controls.idCliente.setValue(this.idClienteNuevo);
       this.getCitaContent(this.idClienteNuevo);
     }
 
@@ -124,7 +126,7 @@ export class CitaComponent implements OnInit {
         console.log("El negro no existe");
         //this._router.navigate(['cliente',this.idCliente]);
         //this._router.navigate(['cliente']);
-        this._router.navigate(['cliente',{id1: "cita", id2: this.idCliente }]);
+        this._router.navigate(['cliente', { id1: "cita", id2: this.idCliente }]);
       }
     );
   }
@@ -148,7 +150,10 @@ export class CitaComponent implements OnInit {
   addCita() {
     this.cita = this.formCita.value;
     this.cita.cliente = this.cliente;
-    this._datePipe.transform(this.cita.fechaAsignacion,'yyyy-mm-dd');
+
+    this._datePipe.transform(this.cita.fechaAsignacion, 'yyyy-mm-dd');
+    let fechaSistema: Date = moment(this.cita.fechaAsignacion).toDate();
+    this.cita.fechaAsignacion = fechaSistema;
     this._citasService.addCita(this.cita).subscribe(
       response => {
         console.log(response);

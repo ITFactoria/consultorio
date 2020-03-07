@@ -11,7 +11,7 @@ export class Cliente implements Icliente {
     telefono: string;
     sexo: string;
     caracteristicas: string;
-    fechaCreacion: string;
+    fechaCreacion: Date;
     citas : Array<Cita> = [];
 
 }

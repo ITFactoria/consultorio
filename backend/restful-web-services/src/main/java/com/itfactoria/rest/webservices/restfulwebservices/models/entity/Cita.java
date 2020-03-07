@@ -7,6 +7,7 @@ package com.itfactoria.rest.webservices.restfulwebservices.models.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,6 +20,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import static javax.persistence.TemporalType.DATE;
 
 /**
  *
@@ -34,7 +36,7 @@ public class Cita implements Serializable {
     private Long id;
     
     @Column(name="fecha_asignacion")
-    @Temporal(TemporalType.DATE)
+    @Temporal(DATE)
     private Date fechaAsignacion;
     
     /*

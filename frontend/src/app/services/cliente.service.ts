@@ -53,7 +53,9 @@ export class ClienteService {
     );
   }
 
-  addCliente(cliente: Icliente){
+  addCliente(cliente: Cliente): Observable<Cliente>{
+    console.log("addcliente service cliente");
+    console.log(cliente);
     return this._httpClient.post<Icliente>(`${this.urlBackend}clientes/`,cliente,{headers:this.httpHeaders}).
     pipe(
       catchError(e=>{

@@ -41,11 +41,11 @@ public class Cliente implements Serializable{
     @Column(nullable = false)
     
     @NotEmpty
-    @Size(min=4, max=100)
+    @Size(min=3, max=100)
     private String nombres;
     
     @NotEmpty
-    @Size(min=4, max=100)
+    @Size(min=3, max=100)
     private String apellidos;
     
     @NotEmpty

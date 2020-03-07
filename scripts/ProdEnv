@@ -7,7 +7,5 @@ insert into clientes(id_cliente, nombres, apellidos, direccion,telefono,sexo,car
 
 
 /*Populate tabla citas*/
-insert into citas(id, fecha_asignacion, estado_cita, cliente_id_cliente) values (1,'2020-03-13',0,'1122334455');
-
-
+insert into citas(id, fecha_asignacion, estado_cita, cliente_id_cliente) values (1,'2020-13-13',0,'1122334455');
 

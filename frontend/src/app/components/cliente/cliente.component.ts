@@ -5,6 +5,8 @@ import { ClienteService } from "../../services/cliente.service";
 import { Icliente } from 'src/app/interfaces/icliente';
 import swal from 'sweetalert2';
 import { DatePipe } from '@angular/common';
+import * as moment from 'moment';
+
 //import { Municipio } from 'src/app/clases/municipio';
 
 
@@ -45,20 +47,20 @@ export class ClienteComponent implements OnInit {
     private _fb: FormBuilder) { }
 
   ngOnInit() {
-    
-    
+
+
     console.log("cliente component init");
-    
+
     //Source page
     this.target = this._activatedRoute.snapshot.params['id1'];
     console.log(this.target);
 
-    
-    if (this.target=="cita"){
+
+    if (this.target == "cita") {
       console.log("cliente llamado x cita");
       this.idCliente = this._activatedRoute.snapshot.params['id2'];
     }
-    else{
+    else {
       console.log("cliente llamado x cliente");
       this.idCliente = this._activatedRoute.snapshot.params['idCliente'];
     }
@@ -86,7 +88,7 @@ export class ClienteComponent implements OnInit {
     })
 
 
-    
+
     if (this.idCliente == null || this.target == "cita") {
       //Adicionar Cliente
       this.flagAccionCliente = 1;
@@ -164,7 +166,11 @@ export class ClienteComponent implements OnInit {
         //Add Cliente
         console.log("Cliente.AddCliente")
         this.cliente = this.formulario.value;
-        this.cliente.fechaCreacion = this._datePipe.transform(new Date(), 'yyyy-mm-dd');
+        let fechaSistema: Date = moment().toDate();
+        this.cliente.fechaCreacion = fechaSistema;
+
+
+
         this._clienteService.addCliente(this.cliente).subscribe(
           response => {
             this.flagOperacionExitosa == true;

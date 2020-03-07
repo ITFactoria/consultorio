@@ -60,6 +60,9 @@ export class CitasComponent implements OnInit {
         this.pipe = new DatePipe('en');
     
         this.citas = response;
+
+        
+        
         this.dataSource = new MatTableDataSource<Cita>(this.citas);
         
         this.dataSource.sort = this.sort;
